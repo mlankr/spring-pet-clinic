@@ -18,7 +18,7 @@
 
     <groupId>com.turing</groupId>
     <artifactId>spring-pet-clinic</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.2</version>
     <name>spring-pet-clinic</name>
     <description>spring-pet-clinic</description>
 
@@ -55,7 +55,7 @@
 
     <scm>
         <developerConnection>scm:git:git@github.com:mlankr/spring-pet-clinic.git</developerConnection>
-      <tag>HEAD</tag>
+      <tag>spring-pet-clinic-0.0.2</tag>
   </scm>
 
 </project>
