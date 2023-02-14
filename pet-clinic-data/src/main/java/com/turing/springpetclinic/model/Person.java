@@ -1,15 +1,15 @@
 package com.turing.springpetclinic.model;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.EqualsAndHashCode;
 
 /**
  * Created by Milan on 2023/02/14.
  */
 
 @Data
-public class Person {
+@EqualsAndHashCode(callSuper = true)
+public class Person extends BaseEntity {
 
     private String firstName;
     private String lastName;
