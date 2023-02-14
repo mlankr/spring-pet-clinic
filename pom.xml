@@ -47,9 +47,7 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <goals>
-                        <goal>install</goal>
-                    </goals>
+                    <goals>install</goals>
                 </configuration>
             </plugin>
         </plugins>
