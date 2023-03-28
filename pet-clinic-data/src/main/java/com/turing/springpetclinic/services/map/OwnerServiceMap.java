@@ -1,7 +1,7 @@
 package com.turing.springpetclinic.services.map;
 
 import com.turing.springpetclinic.model.Owner;
-import com.turing.springpetclinic.services.CrudService;
+import com.turing.springpetclinic.services.OwnerService;
 
 import java.util.Set;
 
@@ -9,7 +9,8 @@ import java.util.Set;
  * Created by Milan on 2023/02/18.
  */
 
-public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements CrudService<Owner, Long> {
+public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
+
     @Override
     public Set<Owner> findAll() {
         return super.findAll();
@@ -33,5 +34,10 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
     @Override
     public Owner findById(Long id) {
         return super.findById(id);
+    }
+
+    @Override
+    public Owner findByLastName(String lastName) {
+        return null;
     }
 }

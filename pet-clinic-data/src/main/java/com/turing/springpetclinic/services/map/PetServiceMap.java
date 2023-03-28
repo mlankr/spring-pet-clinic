@@ -1,7 +1,7 @@
 package com.turing.springpetclinic.services.map;
 
 import com.turing.springpetclinic.model.Pet;
-import com.turing.springpetclinic.services.CrudService;
+import com.turing.springpetclinic.services.PetService;
 
 import java.util.Set;
 
@@ -9,7 +9,7 @@ import java.util.Set;
  * Created by Milan on 2023/02/18.
  */
 
-public class PetServiceMap extends AbstractMapService<Pet, Long> implements CrudService<Pet, Long> {
+public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService {
     @Override
     public Set<Pet> findAll() {
         return super.findAll();
