@@ -1,13 +1,16 @@
-# Default ignored files
+### Default ignored files ###
 **/shelf/
 **/.idea/workspace.xml
-# Editor-based HTTP Client requests
+
+### Editor-based HTTP Client requests ###
 **/httpRequests/
-# Datasource local storage ignored files
+
+### Datasource local storage ignored files ###
 **/dataSources/
 **/dataSources.local.xml
 
-##### Maven Gitignore #####
+### Maven Gitignore ###
+HELP.md
 **/target/
 **/pom.xml.tag
 **/pom.xml.releaseBackup
@@ -19,13 +22,30 @@
 **/.mvn/timing.properties
 !**/.mvn/wrapper/
 
-# Eclipse m2e generated files. Eclipse Core
+### Eclipse m2e generated files. Eclipse Core ###
 **/.project
-# JDT-specific (Eclipse Java Development Tools)
+
+### JDT-specific (Eclipse Java Development Tools) ###
 **/.classpath
 
+### STS (Spring Tool Suite) ###
+**/.apt_generated
+**/.factorypath
+**/.settings
+**/.springBeans
+**/.sts4-cache
 
-# IDEA artifacts and output dirs
+### NetBeans ###
+**/nbproject/private/
+**/nbbuild/
+**/dist/
+**/nbdist/
+**/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### IDEA artifacts and output dirs ###
 **/.idea
 **/*.iml
 **/*.ipr
@@ -34,7 +54,7 @@
 **/test-output
 **/atlassian-ide-plugin.xml
 
-# VS Code
+### VS Code ###
 **/.vs
 **/.vscode/
 **/!.vscode/settings.json
@@ -42,7 +62,7 @@
 **/!.vscode/launch.json
 **/!.vscode/extensions.json
 
-# Log files
+### Log files ###
 **/jxl.log
 **/jmx.log
 **/derby.log
@@ -50,7 +70,7 @@
 **/*.log
 **/*.log*
 
-# Gradle artifacts
+### Gradle artifacts ###
 **/.gradle
 **/.gradletasknamecache
 **/build
@@ -62,14 +82,13 @@
 **/src/asciidoc/build
 **/spring-test/test-output/
 
-# Miscellaneous
+### Miscellaneous ###
 **/.git
 **/.sass-cache
 **/typings
 **/*.java.hsp
 **/*.sonarj
 **/*.sw*
-**/dist
 **/tmp
 **/.DS_Store
 **/build.sh

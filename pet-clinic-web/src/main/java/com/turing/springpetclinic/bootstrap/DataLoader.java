@@ -22,7 +22,7 @@ public class DataLoader implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
         Owner owner1 = new Owner();
         owner1.setFirstName("Michael");
