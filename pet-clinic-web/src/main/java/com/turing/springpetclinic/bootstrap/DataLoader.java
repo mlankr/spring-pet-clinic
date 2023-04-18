@@ -1,8 +1,10 @@
 package com.turing.springpetclinic.bootstrap;
 
 import com.turing.springpetclinic.model.Owner;
+import com.turing.springpetclinic.model.PetType;
 import com.turing.springpetclinic.model.Vet;
 import com.turing.springpetclinic.services.OwnerService;
+import com.turing.springpetclinic.services.PetTypeService;
 import com.turing.springpetclinic.services.VetService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -15,14 +17,20 @@ public class DataLoader implements CommandLineRunner {
 
     private final OwnerService ownerService;
     private final VetService vetService;
+    private final PetTypeService petTypeService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
+        this.petTypeService = petTypeService;
     }
 
     @Override
     public void run(String... args) {
+
+        PetType dog = new PetType();
+        dog.setName("Dog");
+        petTypeService.save(dog);
 
         Owner owner1 = new Owner();
         owner1.setFirstName("Michael");
@@ -34,8 +42,6 @@ public class DataLoader implements CommandLineRunner {
         owner2.setLastName("Glenanne");
         ownerService.save(owner2);
 
-        System.out.println("Loaded Owners....");
-
         Vet vet1 = new Vet();
         vet1.setFirstName("Sam");
         vet1.setLastName("Axe");
@@ -46,6 +52,6 @@ public class DataLoader implements CommandLineRunner {
         vet2.setLastName("Porter");
         vetService.save(vet2);
 
-        System.out.println("Loaded Vets....");
+        System.out.println("******* Loaded Owners and Vets from DataLoader *******");
     }
 }
