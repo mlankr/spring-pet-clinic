@@ -1,15 +1,15 @@
 package com.turing.springpetclinic.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDate;
 
 /**
  * Created by Milan on 2023/04/18.
  */
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(callSuper = true)
 public class Visit extends BaseEntity {
 
     private LocalDate date;
