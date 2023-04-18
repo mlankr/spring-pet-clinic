@@ -12,12 +12,12 @@ import java.util.Set;
 @Getter
 public class Vet extends Person {
 
-    private final Set<Specialty> specialties;
+    private final Set<Speciality> specialties;
 
     @Builder(toBuilder = true)
     public Vet(@Builder.ObtainVia(method = "getFirstname") String firstname,
                @Builder.ObtainVia(method = "getLastname") String lastname,
-               @Singular Set<Specialty> specialties) {
+               @Singular Set<Speciality> specialties) {
         super(firstname, lastname);
         this.specialties = specialties;
     }
