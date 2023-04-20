@@ -1,15 +1,20 @@
 package com.turing.springpetclinic.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Builder;
+import lombok.Getter;
 
 /**
  * Created by Milan on 2023/04/18.
  */
 
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Getter
 public class Speciality extends BaseEntity {
 
-    private String description;
+    private final String description;
+
+    @Builder(toBuilder = true)
+    public Speciality(@Builder.ObtainVia(method = "getId") Long id, String description) {
+        super(id);
+        this.description = description;
+    }
 }
