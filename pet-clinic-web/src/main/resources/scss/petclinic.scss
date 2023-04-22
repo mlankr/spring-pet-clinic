@@ -47,6 +47,11 @@ $pagination-active-bg: $spring-brown;
 $pagination-active-border: $spring-green;
 $table-border-color: $spring-brown;
 
+html {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
 .table > thead > tr > th {
   background-color: lighten($spring-brown, 3%);
   color: $spring-light-grey;

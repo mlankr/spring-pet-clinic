@@ -1,9 +1,9 @@
 @media (max-width: 768px) {
   .navbar-toggle {
-    position:absolute;
+    position: absolute;
     z-index: 9999;
-    left:0px;
-    top:0px;
+    left: 0px;
+    top: 0px;
   }
 
   .navbar a.navbar-brand {
@@ -13,6 +13,10 @@
     height: 50px;
     float: none;
     background: url("../images/spring-logo-dataflow-mobile.png") 0 center no-repeat;
+  }
+
+  .navbar li > a {
+    padding: 16px 10px;
   }
 
   .homepage-billboard .homepage-subtitle {

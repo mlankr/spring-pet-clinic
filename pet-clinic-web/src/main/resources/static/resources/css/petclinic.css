@@ -8371,6 +8371,10 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important; } }
 
+html {
+  max-width: 1920px;
+  margin: 0 auto; }
+
 .table > thead > tr > th {
   background-color: #3c3834;
   color: #f1f1f1; }
@@ -8610,6 +8614,8 @@ strong {
     height: 50px;
     float: none;
     background: url("../images/spring-logo-dataflow-mobile.png") 0 center no-repeat; }
+  .navbar li > a {
+    padding: 16px 10px; }
   .homepage-billboard .homepage-subtitle {
     font-size: 21px;
     line-height: 21px; }
