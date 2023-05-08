@@ -1,7 +1,12 @@
 package com.turing.springpetclinic.model;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Singular;
 
 import java.util.Set;
@@ -10,12 +15,17 @@ import java.util.Set;
  * Created by Milan on 2023/02/14.
  */
 @Getter
+@NoArgsConstructor
+@Entity
+@Table
 public class Owner extends Person {
 
-    private final String address;
-    private final String city;
-    private final String telephone;
-    private final Set<Pet> pets;
+    private String address;
+    private String city;
+    private String telephone;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private Set<Pet> pets;
 
     @Builder(toBuilder = true)
     public Owner(@Builder.ObtainVia(method = "getFirstname") String firstname,

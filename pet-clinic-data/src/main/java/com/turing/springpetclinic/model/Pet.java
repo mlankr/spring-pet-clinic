@@ -1,7 +1,12 @@
 package com.turing.springpetclinic.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
@@ -10,12 +15,21 @@ import java.time.LocalDate;
  */
 
 @Getter
+@NoArgsConstructor
+@Entity
+@Table
 public class Pet extends BaseEntity {
 
-    private final String name;
-    private final PetType petType;
-    private final Owner owner;
-    private final LocalDate birthDate;
+    private String name;
+    private LocalDate birthDate;
+
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    private PetType petType;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
 
     @Builder(toBuilder = true)
     public Pet(@Builder.ObtainVia(method = "getId") Long id, String name, PetType petType, Owner owner,
