@@ -1,10 +1,7 @@
 package com.turing.springpetclinic.bootstrap;
 
 import com.turing.springpetclinic.model.*;
-import com.turing.springpetclinic.services.OwnerService;
-import com.turing.springpetclinic.services.PetTypeService;
-import com.turing.springpetclinic.services.SpecialityService;
-import com.turing.springpetclinic.services.VetService;
+import com.turing.springpetclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -21,13 +18,15 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
     public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
-                      SpecialityService specialityService) {
+                      SpecialityService specialityService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -71,6 +70,9 @@ public class DataLoader implements CommandLineRunner {
 
         owner2.toBuilder().pet(pet2).build();
         ownerService.save(owner2);
+
+        Visit catVisit = Visit.builder().pet(pet2).date(LocalDate.now()).build();
+        visitService.save(catVisit);
 
         Vet vet1 = Vet.builder().firstname("Sam").lastname("Axe").build();
         vet1.toBuilder().specialties(Set.of(savedRadiology, savedDentistry)).build();
