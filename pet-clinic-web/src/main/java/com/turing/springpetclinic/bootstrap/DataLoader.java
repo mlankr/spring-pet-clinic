@@ -16,14 +16,17 @@ public class DataLoader implements CommandLineRunner {
 
     private final OwnerService ownerService;
     private final VetService vetService;
+    private final PetService petService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
     private final VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
+    public DataLoader(OwnerService ownerService, VetService vetService, PetService petService,
+                      PetTypeService petTypeService,
                       SpecialityService specialityService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
+        this.petService = petService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
         this.visitService = visitService;
@@ -56,18 +59,24 @@ public class DataLoader implements CommandLineRunner {
         Owner owner1 = Owner.builder().firstname("Michael").lastname("Weston").address(
                 "King street 123").city("London").telephone("0123456789").build();
 
+        ownerService.save(owner1);
+
         Pet pet1 = Pet.builder().name("Shinobu").petType(savedDogType).owner(owner1).birthDate(
                 LocalDate.now().minusDays(330)).build();
 
+        petService.save(pet1);
         owner1.toBuilder().pet(pet1).build();
         ownerService.save(owner1);
 
         Owner owner2 = Owner.builder().firstname("Fiona").lastname("Glenna").address(
                 "Queen street 123").city("Manchester").telephone("0357903579").build();
 
+        ownerService.save(owner2);
+
         Pet pet2 = Pet.builder().name("Coco").petType(savedCatType).owner(owner2).birthDate(
                 LocalDate.now().minusDays(120)).build();
 
+        petService.save(pet2);
         owner2.toBuilder().pet(pet2).build();
         ownerService.save(owner2);
 
