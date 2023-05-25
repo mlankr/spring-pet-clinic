@@ -21,17 +21,19 @@ jobs:
 
       # Download and cache dependencies
       - restore_cache:
-        keys:
-          - v1-dependencies-{{ checksum "pom.xml" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
 
       # Use mvn clean and package as the standard maven build phase
       - run:
           name: Build
           command: mvn -B -DskipTests clean package
 
-      - run: mvn dependency:go-offline
+      - run:
+          name: Cache
+          command: mvn dependency:go-offline
 
       - save_cache:
           paths:
