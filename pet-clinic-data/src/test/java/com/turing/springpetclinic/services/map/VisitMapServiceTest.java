@@ -6,22 +6,37 @@ import com.turing.springpetclinic.model.PetType;
 import com.turing.springpetclinic.model.Visit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class VisitMapServiceTest {
 
+    @Mock
+    private Owner owner;
+
+    @Mock
+    private Pet pet;
+
+    @Mock
+    private PetType petType;
+
+    @InjectMocks
     private VisitMapService visitMapService;
 
     private final Long visitId = 1L;
 
     @BeforeEach
     void setUp() {
-        Owner owner = Owner.builder().build();
-        PetType petType = PetType.builder().build();
-        Pet pet = Pet.builder().owner(owner).petType(petType).build();
+        when(pet.getOwner()).thenReturn(owner);
+        when(pet.getPetType()).thenReturn(petType);
 
-        visitMapService = new VisitMapService();
         visitMapService.save(Visit.builder().pet(pet).build());
     }
 
@@ -39,9 +54,13 @@ class VisitMapServiceTest {
     void save() {
         Long secondId = 2L;
 
-        Owner owner2 = Owner.builder().build();
-        PetType petType2 = PetType.builder().build();
-        Pet pet2 = Pet.builder().owner(owner2).petType(petType2).build();
+        Owner owner2 = mock(Owner.class);
+        PetType petType2 = mock(PetType.class);
+        Pet pet2 = mock(Pet.class);
+
+        when(pet2.getOwner()).thenReturn(owner2);
+        when(pet2.getPetType()).thenReturn(petType2);
+
         Visit savedVisit = visitMapService.save(Visit.builder().pet(pet2).build());
         assertEquals(secondId, savedVisit.getId());
     }

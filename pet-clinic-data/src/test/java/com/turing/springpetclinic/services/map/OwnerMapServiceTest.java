@@ -5,11 +5,15 @@ import com.turing.springpetclinic.services.PetService;
 import com.turing.springpetclinic.services.PetTypeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+@ExtendWith(MockitoExtension.class)
 class OwnerMapServiceTest {
 
     @Mock
@@ -18,6 +22,7 @@ class OwnerMapServiceTest {
     @Mock
     private PetService petService;
 
+    @InjectMocks
     private OwnerMapService ownerMapService;
 
     private final long ownerId = 1L;
@@ -25,7 +30,6 @@ class OwnerMapServiceTest {
 
     @BeforeEach
     void setUp() {
-        ownerMapService = new OwnerMapService(petTypeService, petService);
         ownerMapService.save(Owner.builder().lastname(lastName).build());
     }
 

@@ -4,22 +4,26 @@ import com.turing.springpetclinic.model.Vet;
 import com.turing.springpetclinic.services.SpecialityService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ExtendWith(MockitoExtension.class)
 class VetMapServiceTest {
 
     @Mock
     private SpecialityService specialityService;
 
+    @InjectMocks
     private VetMapService vetMapService;
 
     private final Long vetId = 1L;
 
     @BeforeEach
     void setUp() {
-        vetMapService = new VetMapService(specialityService);
         vetMapService.save(Vet.builder().build());
     }
 
