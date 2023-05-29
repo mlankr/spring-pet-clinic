@@ -31,9 +31,9 @@ jobs:
           name: Build
           command: mvn -B -DskipTests clean package
 
-      # Goal to resolves all project dependencies, including plugins and reports and their dependencies
+      # Resolve all project dependencies, including plugins and reports and their dependencies
       - run:
-          name: Resolve
+          name: Resolve dependencies
           command: mvn dependency:go-offline
 
       - save_cache:
