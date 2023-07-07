@@ -19,13 +19,15 @@ class IndexControllerTest {
 
 	@Test
 	void index() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/")).andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.view().name("index"));
+		mockMvc.perform(MockMvcRequestBuilders.get("/"))
+			   .andExpect(MockMvcResultMatchers.status().isOk())
+			   .andExpect(MockMvcResultMatchers.view().name("index"));
 	}
 
 	@Test
 	void error() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/oops")).andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.view().name("notImplemented"));
+		mockMvc.perform(MockMvcRequestBuilders.get("/oops"))
+			   .andExpect(MockMvcResultMatchers.status().isOk())
+			   .andExpect(MockMvcResultMatchers.view().name("notImplemented"));
 	}
 }
