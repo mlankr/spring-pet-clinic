@@ -2,30 +2,27 @@
       th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
 
 <body>
-    <h2>Find Owners</h2>
-    <form th:object="${owner}" th:action="@{/owners}" method="get"
-          class="form-horizontal" id="search-owner-form">
-        <div class="form-group">
-            <div class="control-group" id="lastNameGroup">
-                <label class="col-sm-2 control-label">Last name </label>
-                <div class="col-sm-10">
-                    <input class="form-control" th:field="*{lastName}" size="30"
-                           maxlength="80"/> <span class="help-inline"><div
-                        th:if="${#fields.hasAnyErrors()}">
-              <p th:each="err : ${#fields.allErrors()}" th:text="${err}">Error</p>
-            </div></span>
-                </div>
+<form th:object="${owner}" th:action="@{/owners}" method="GET"
+      class="form-horizontal" id="search-owner-form">
+    <div class="form-group">
+        <div class="control-group" id="lastNameGroup">
+            <label for="lastname-input" class="control-label fw-bold">Last name </label>
+            <input id="lastname-input" class="form-control mt-2" th:field="*{lastname}" size="30"
+                   maxlength="80"/>
+            <div class="help-inline d-inline">
+                <div th:if="${#fields.hasAnyErrors()}">
+                    <p th:each="err : ${#fields.allErrors()}" th:text="${err}" class="text-danger">
+                        Error</p></div>
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-primary">Find
-                    Owner
-                </button>
-            </div>
-        </div>
+    </div>
+    <div class="form-group d-flex justify-content-center mt-2">
+        <button type="submit" class="btn btn-primary">Find Owner</button>
+    </div>
 
-        <a class="btn btn-primary" th:href="@{/owners/new}">Add Owner</a>
-    </form>
+    <div class="mt-3">
+        <a class="btn btn-primary text-center" th:href="@{/owners/new}">Add New Owner</a>
+    </div>
+</form>
 </body>
 </html>
