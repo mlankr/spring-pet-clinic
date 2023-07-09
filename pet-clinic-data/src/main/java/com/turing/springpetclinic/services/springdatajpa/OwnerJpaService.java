@@ -42,6 +42,16 @@ public class OwnerJpaService implements OwnerService {
 	}
 
 	@Override
+	public Owner update(Owner owner, Long id) {
+		Owner currentOwner = this.findById(id);
+		if (currentOwner != null) {
+			owner.setId(id);
+			return this.save(owner);
+		}
+		throw new RuntimeException("Owner doesn't exist!");
+	}
+
+	@Override
 	public void delete(Owner owner) {
 		ownerRepository.delete(owner);
 	}

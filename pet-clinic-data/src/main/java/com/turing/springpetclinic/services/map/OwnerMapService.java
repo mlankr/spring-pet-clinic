@@ -73,6 +73,16 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
 	}
 
 	@Override
+	public Owner update(Owner owner, Long id) {
+		Owner currentOwner = this.findById(id);
+		if (currentOwner != null) {
+			owner.setId(id);
+			return this.save(owner);
+		}
+		throw new RuntimeException("Owner doesn't exist!");
+	}
+
+	@Override
 	public Owner findByLastName(String lastName) {
 		return this.findAll().stream().filter(o -> o.getLastname().equalsIgnoreCase(lastName)).findFirst().orElse(null);
 	}
