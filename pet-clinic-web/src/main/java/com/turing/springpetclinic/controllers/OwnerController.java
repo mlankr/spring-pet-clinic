@@ -32,14 +32,6 @@ public class OwnerController {
 		dataBinder.setDisallowedFields("id");
 	}
 
-	@RequestMapping("/{ownerId}")
-	public ModelAndView showOwner(@PathVariable("ownerId") Long ownerId) {
-		ModelAndView mav = new ModelAndView("owners/ownerDetails");
-		Owner owner = ownerService.findById(ownerId);
-		mav.addObject(owner);
-		return mav;
-	}
-
 	@RequestMapping("/find")
 	public String findOwners(Model model) {
 		model.addAttribute("owner", Owner.builder().build());
@@ -56,7 +48,7 @@ public class OwnerController {
 
 		if (results.isEmpty()) {
 			// no owners found
-			result.rejectValue("lastname", "notFound", "not found");
+			result.rejectValue("lastname", "notFound", "Not found");
 			return "owners/findOwners";
 		} else if (results.size() == 1) {
 			// 1 owner found
@@ -67,5 +59,13 @@ public class OwnerController {
 			model.addAttribute("selections", results);
 			return "owners/ownersList";
 		}
+	}
+
+	@RequestMapping("/{ownerId}")
+	public ModelAndView showOwner(@PathVariable("ownerId") Long ownerId) {
+		ModelAndView mav = new ModelAndView("owners/ownerDetails");
+		Owner owner = ownerService.findById(ownerId);
+		mav.addObject(owner);
+		return mav;
 	}
 }
