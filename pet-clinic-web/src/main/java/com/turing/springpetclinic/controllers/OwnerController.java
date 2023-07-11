@@ -24,7 +24,7 @@ public class OwnerController {
 		this.ownerService = ownerService;
 	}
 
-	@InitBinder
+	@InitBinder()
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
 	}
@@ -83,13 +83,13 @@ public class OwnerController {
 	}
 
 	@GetMapping("/{ownerId}/edit")
-	public String initUpdateOwnerForm(@PathVariable long ownerId, Model model) {
+	public String initUpdateOwnerForm(@PathVariable Long ownerId, Model model) {
 		model.addAttribute(ownerService.findById(ownerId));
 		return "owners/createOrUpdateOwnerForm";
 	}
 
 	@PostMapping("/{ownerId}/edit")
-	public String processUpdateOwnerForm(@Validated Owner owner, BindingResult result, @PathVariable long ownerId) {
+	public String processUpdateOwnerForm(@Validated Owner owner, BindingResult result, @PathVariable Long ownerId) {
 		if (result.hasErrors()) {
 			return "owners/createOrUpdateOwnerForm";
 		}

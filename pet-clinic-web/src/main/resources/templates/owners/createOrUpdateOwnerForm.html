@@ -3,31 +3,31 @@
 
 <body>
 <h2>Owner</h2>
-<form th:object="${owner}" class="form-horizontal" id="add-owner-form" method="post">
+<form th:object="${owner}" class="form-horizontal needs-validation" id="add-owner-form" method="post" novalidate>
     <div class="form-group has-feedback">
         <div>
             <label for="firstname"></label>
-            <input id="firstname" th:replace="~{fragments/inputField :: input ('First Name', 'firstname', 'text')}"/>
+            <input id="firstname" th:replace="~{fragments/inputField :: input ('First name', 'firstname', 'text', true)}"/>
         </div>
         <div>
             <label for="lastname"></label>
-            <input id="lastname" th:replace="~{fragments/inputField :: input ('Last Name', 'lastname', 'text')}"/>
+            <input id="lastname" th:replace="~{fragments/inputField :: input ('Last name', 'lastname', 'text', true)}"/>
         </div>
         <div>
             <label for="address"></label>
-            <input id="address" th:replace="~{fragments/inputField :: input ('Address', 'address', 'text')}"/>
+            <input id="address" th:replace="~{fragments/inputField :: input ('Address', 'address', 'text', true)}"/>
         </div>
         <div>
             <label for="city"></label>
-            <input id="city" th:replace="~{fragments/inputField :: input ('City', 'city', 'text')}"/>
+            <input id="city" th:replace="~{fragments/inputField :: input ('City', 'city', 'text', true)}"/>
         </div>
         <div>
             <label for="telephone"></label>
-            <input id="telephone" th:replace="~{fragments/inputField :: input ('Telephone', 'telephone', 'text')}"/>
+            <input id="telephone" th:replace="~{fragments/inputField :: input ('Telephone', 'telephone', 'text', false)}"/>
         </div>
     </div>
     <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
+        <div class="col-sm-offset-2 col-sm-10 mt-2 d-flex justify-content-center">
             <button
                     th:with="text=${owner['new']} ? 'Add Owner' : 'Update Owner'"
                     class="btn btn-primary" type="submit" th:text="${text}">Add
