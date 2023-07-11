@@ -90,12 +90,12 @@ class PetControllerTest {
 
 	@Test
 	void processUpdateForm() throws Exception {
-		when(petService.save(any())).thenReturn(Pet.builder().id(1L).build());
+		when(petService.update(any(), anyLong())).thenReturn(Pet.builder().id(1L).build());
 
 		mockMvc.perform(post("/owners/1/pets/2/edit"))
 			   .andExpect(status().is3xxRedirection())
 			   .andExpect(view().name("redirect:/owners/1"));
 
-		verify(petService, times(1)).save(any());
+		verify(petService, times(1)).update(any(), anyLong());
 	}
 }
