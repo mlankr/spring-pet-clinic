@@ -7,6 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -71,7 +73,8 @@ public class DataLoader implements CommandLineRunner {
 					  .name("Shinobu")
 					  .petType(savedDogType)
 					  .owner(owner1)
-					  .birthDate(LocalDate.now().minusDays(330))
+					  .birthDate(Date.from(
+							  LocalDate.now().minusDays(330).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()))
 					  .build();
 
 		petService.save(pet1);
@@ -92,7 +95,8 @@ public class DataLoader implements CommandLineRunner {
 					  .name("Coco")
 					  .petType(savedCatType)
 					  .owner(owner2)
-					  .birthDate(LocalDate.now().minusDays(120))
+					  .birthDate(Date.from(
+							  LocalDate.now().minusDays(120).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()))
 					  .build();
 
 		petService.save(pet2);

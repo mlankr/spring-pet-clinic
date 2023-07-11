@@ -13,7 +13,7 @@
                 </label>
                 <div class="my-2">
                     <select th:id="${name}" th:field="*{__${name}__}" class="w-100 p-2 form-control form-select">
-                        <option th:each="item : ${items}" th:value="${item}"
+                        <option th:each="item : ${items}" th:value="${item.getId()}"
                                 th:text="${item.getName()}">Pet
                         </option>
                     </select>

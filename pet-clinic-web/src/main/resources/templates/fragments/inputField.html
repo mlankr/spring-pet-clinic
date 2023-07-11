@@ -14,7 +14,6 @@
                         </span>
                     </label>
                     <input th:id="${name + '' + type}" th:case="'text'" class="form-control mt-2" type="text" th:field="*{__${name}__}" th:required="${isRequired}"/>
-                    <!--                    <label for="date-input" th:if="${type != null && type == 'date'}"></label>-->
                     <input id="date-input" th:case="'date'" class="form-control mt-2" type="date" th:field="*{__${name}__}" th:required="${isRequired}"/>
                 </div>
                 <span th:if="${valid}"

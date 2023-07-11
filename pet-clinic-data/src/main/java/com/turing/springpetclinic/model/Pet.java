@@ -2,8 +2,9 @@ package com.turing.springpetclinic.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -18,7 +19,9 @@ import java.util.Set;
 public class Pet extends BaseEntity {
 
 	private String name;
-	private LocalDate birthDate;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date birthDate;
 
 	@ManyToOne
 	@JoinColumn(name = "type_id")
@@ -32,8 +35,8 @@ public class Pet extends BaseEntity {
 	private Set<Visit> visits;
 
 	@Builder(toBuilder = true)
-	public Pet(@Builder.ObtainVia(method = "getId") Long id, String name, LocalDate birthDate, PetType petType,
-			Owner owner, @Singular Set<Visit> visits) {
+	public Pet(@Builder.ObtainVia(method = "getId") Long id, String name, Date birthDate, PetType petType, Owner owner,
+			@Singular Set<Visit> visits) {
 		super(id);
 		this.name = name;
 		this.birthDate = birthDate;

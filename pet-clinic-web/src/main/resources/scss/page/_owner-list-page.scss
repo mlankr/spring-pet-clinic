@@ -1,0 +1,15 @@
+@import '../base/mixin/crossbrowser';
+
+#owners {
+  overflow-x: auto;
+  @include custom-scrollbar($size: 12px);
+
+  tr th {
+    min-width: 50px;
+  }
+
+  dt {
+    min-width: 85px;
+  }
+
+}

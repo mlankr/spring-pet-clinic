@@ -65,20 +65,16 @@
         </div>
     </div>
 </nav>
-<div class="container-fluid">
-    <div class="container xd-container">
-
+<div class="container-fluid page-container py-3">
+    <div class="content-wrap px-1 px-sm-2 pt-3">
         <th:block th:insert="${template}"/>
-
-        <br/>
-        <br/>
-        <div class="container fixed-bottom my-3">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <img src="../static/resources/images/spring-pivotal-logo.png"
-                         th:src="@{/resources/images/spring-pivotal-logo.png}" alt="Sponsored by Pivotal"/></div>
-            </div>
-        </div>
+    </div>
+    <div class="row footer-container d-flex justify-content-center mt-2">
+        <div class="col-12 text-center">
+            <img src="../static/resources/images/spring-pivotal-logo.png"
+                 th:src="@{/resources/images/spring-pivotal-logo.png}" alt="Sponsored by Pivotal"/></div>
+        <p class="text-center mt-2">&copy;2023 Milan Koirala | Inspired By:
+            <a href="https://github.com/spring-projects/spring-petclinic">Spring-Petclinic-App</a></p>
     </div>
 </div>
 <script th:src="@{/webjars/bootstrap/5.2.3/dist/js/bootstrap.bundle.min.js}"></script>
