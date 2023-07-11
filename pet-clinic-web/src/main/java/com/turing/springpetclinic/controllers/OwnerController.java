@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Milan on 2023/02/19.
@@ -61,8 +62,8 @@ public class OwnerController {
 	@RequestMapping("/{ownerId}")
 	public ModelAndView showOwner(@PathVariable("ownerId") Long ownerId) {
 		ModelAndView mav = new ModelAndView("owners/ownerDetails");
-		Owner owner = ownerService.findById(ownerId);
-		mav.addObject(owner);
+		Optional<Owner> owner = Optional.of(ownerService.findById(ownerId));
+		owner.ifPresent(mav::addObject);
 		return mav;
 	}
 

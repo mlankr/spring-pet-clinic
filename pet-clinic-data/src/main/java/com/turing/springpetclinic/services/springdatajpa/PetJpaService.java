@@ -17,36 +17,46 @@ import java.util.Set;
 @Profile("springdatajpa")
 public class PetJpaService implements PetService {
 
-    private final PetRepository petRepository;
+	private final PetRepository petRepository;
 
-    public PetJpaService(PetRepository petRepository) {
-        this.petRepository = petRepository;
-    }
+	public PetJpaService(PetRepository petRepository) {
+		this.petRepository = petRepository;
+	}
 
-    @Override
-    public Set<Pet> findAll() {
-        Set<Pet> pets = new HashSet<>();
-        petRepository.findAll().forEach(pets::add);
-        return pets;
-    }
+	@Override
+	public Set<Pet> findAll() {
+		Set<Pet> pets = new HashSet<>();
+		petRepository.findAll().forEach(pets::add);
+		return pets;
+	}
 
-    @Override
-    public Pet findById(Long id) {
-        return petRepository.findById(id).orElse(null);
-    }
+	@Override
+	public Pet findById(Long id) {
+		return petRepository.findById(id).orElse(null);
+	}
 
-    @Override
-    public Pet save(Pet pet) {
-        return petRepository.save(pet);
-    }
+	@Override
+	public Pet save(Pet pet) {
+		return petRepository.save(pet);
+	}
 
-    @Override
-    public void delete(Pet pet) {
-        petRepository.delete(pet);
-    }
+	@Override
+	public void delete(Pet pet) {
+		petRepository.delete(pet);
+	}
 
-    @Override
-    public void deleteById(Long id) {
-        petRepository.deleteById(id);
-    }
+	@Override
+	public void deleteById(Long id) {
+		petRepository.deleteById(id);
+	}
+
+	@Override
+	public Pet update(Pet pet, Long id) {
+		Pet currentPet = this.findById(id);
+		if (currentPet != null) {
+			pet.setId(id);
+			return this.save(pet);
+		}
+		throw new RuntimeException("Pet doesn't exist!");
+	}
 }

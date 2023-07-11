@@ -19,7 +19,7 @@
             <input id="birthDate" th:replace="~{fragments/inputField :: input ('Birth Date', 'birthDate', 'date', true)}" aria-label="birthdate"/>
         </div>
         <div>
-            <input id="type" th:replace="~{fragments/selectField :: select ('Type', 'petType', ${types}, true)}" aria-label="type"/>
+            <input id="type" th:replace="~{fragments/selectField :: select ('Type', 'petType', ${types}, true, ${pet.getPetType()})}" aria-label="type"/>
         </div>
     </div>
     <div class="form-group">

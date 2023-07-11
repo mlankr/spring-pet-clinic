@@ -1,7 +1,7 @@
 <html>
 <body>
 <form>
-    <th:block th:fragment="select (label, name, items, isRequired)">
+    <th:block th:fragment="select (label, name, items, isRequired, currentPetType)">
         <div th:with="valid=${!#fields.hasErrors(name)}"
              th:class="${'form-group' + (valid ? '' : ' has-error')}"
              class="form-group row">
@@ -12,9 +12,11 @@
                         </span>
                 </label>
                 <div class="my-2">
-                    <select th:id="${name}" th:field="*{__${name}__}" class="w-100 p-2 form-control form-select">
+                    <select th:id="${name}" th:name="${name}" class="w-100 p-2 form-control form-select">
+                        <option th:text="#{selectValue.msg}" value="" th:selected="${currentPetType == null}" disabled></option>
                         <option th:each="item : ${items}" th:value="${item.getId()}"
-                                th:text="${item.getName()}">Pet
+                                th:text="${item.getName()}" th:selected="${currentPetType != null && item.getId() == currentPetType.getId()}">
+                            Pet
                         </option>
                     </select>
                 </div>

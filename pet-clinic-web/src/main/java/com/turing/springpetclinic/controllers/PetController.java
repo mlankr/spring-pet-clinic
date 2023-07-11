@@ -64,12 +64,13 @@ public class PetController {
 		if (StringUtils.hasLength(pet.getName()) && pet.isNew() && owner.getPets().contains(pet)) {
 			result.rejectValue("name", "duplicate", "already exists");
 		}
-		owner.setPets(Set.of(pet));
 		if (result.hasErrors()) {
 			model.addAttribute("pet", pet);
 			return "pets/createOrUpdatePetForm";
 		} else {
-			petService.save(pet);
+			pet = pet.toBuilder().owner(owner).build();
+			Pet savedPet = petService.save(pet);
+			owner.setPets(Set.of(savedPet));
 			return "redirect:/owners/" + owner.getId();
 		}
 	}
@@ -88,8 +89,9 @@ public class PetController {
 			model.addAttribute("pet", pet);
 			return "pets/createOrUpdatePetForm";
 		} else {
-			owner.setPets(Set.of(pet));
-			petService.save(pet);
+			pet = pet.toBuilder().owner(owner).build();
+			Pet updatedPet = petService.update(pet, petId);
+			owner.setPets(Set.of(updatedPet));
 			return "redirect:/owners/" + owner.getId();
 		}
 	}
