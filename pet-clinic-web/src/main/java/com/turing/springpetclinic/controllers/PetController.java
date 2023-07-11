@@ -89,7 +89,6 @@ public class PetController {
 			return "pets/createOrUpdatePetForm";
 		} else {
 			owner.setPets(Set.of(pet));
-			System.out.println(owner);
 			petService.save(pet);
 			return "redirect:/owners/" + owner.getId();
 		}

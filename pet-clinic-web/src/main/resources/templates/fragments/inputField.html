@@ -5,17 +5,16 @@
         <div th:with="valid=${!#fields.hasErrors(name)}"
              th:class="${'form-group' + (valid ? '' : ' has-error')}"
              class="form-group row">
-            <label th:for="${label + '' + type}" class="col-sm-2 control-label mt-3">
-                <span>
-                    <span th:text="${label}">Label</span>
-                    <span th:text="${isRequired} ? '*' : ''" class="text-danger"></span>
-                </span>
-            </label>
             <div class="col-sm-10">
                 <div th:switch="${type}">
-                    <label for="text-input"></label>
-                    <input id="text-input" th:case="'text'" class="form-control mt-2" type="text" th:field="*{__${name}__}" th:required="${isRequired}"/>
-                    <label for="date-input"></label>
+                    <label th:for="${name + '' + type}" class="col-sm-4 control-label mt-3">
+                        <span>
+                            <span th:text="${label}">Label</span>
+                            <span th:text="${isRequired} ? '*' : ''" class="text-danger"></span>
+                        </span>
+                    </label>
+                    <input th:id="${name + '' + type}" th:case="'text'" class="form-control mt-2" type="text" th:field="*{__${name}__}" th:required="${isRequired}"/>
+                    <!--                    <label for="date-input" th:if="${type != null && type == 'date'}"></label>-->
                     <input id="date-input" th:case="'date'" class="form-control mt-2" type="date" th:field="*{__${name}__}" th:required="${isRequired}"/>
                 </div>
                 <span th:if="${valid}"

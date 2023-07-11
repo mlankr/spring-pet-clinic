@@ -6,24 +6,19 @@
 <form th:object="${owner}" class="form-horizontal needs-validation" id="add-owner-form" method="post" novalidate>
     <div class="form-group has-feedback">
         <div>
-            <label for="firstname"></label>
-            <input id="firstname" th:replace="~{fragments/inputField :: input ('First name', 'firstname', 'text', true)}"/>
+            <input id="firstname" th:replace="~{fragments/inputField :: input ('First name', 'firstname', 'text', true)}" aria-label="firstname"/>
         </div>
         <div>
-            <label for="lastname"></label>
-            <input id="lastname" th:replace="~{fragments/inputField :: input ('Last name', 'lastname', 'text', true)}"/>
+            <input id="lastname" th:replace="~{fragments/inputField :: input ('Last name', 'lastname', 'text', true)}" aria-label="lastname"/>
         </div>
         <div>
-            <label for="address"></label>
-            <input id="address" th:replace="~{fragments/inputField :: input ('Address', 'address', 'text', true)}"/>
+            <input id="address" th:replace="~{fragments/inputField :: input ('Address', 'address', 'text', true)}" aria-label="address"/>
         </div>
         <div>
-            <label for="city"></label>
-            <input id="city" th:replace="~{fragments/inputField :: input ('City', 'city', 'text', true)}"/>
+            <input id="city" th:replace="~{fragments/inputField :: input ('City', 'city', 'text', true)}" aria-label="city"/>
         </div>
         <div>
-            <label for="telephone"></label>
-            <input id="telephone" th:replace="~{fragments/inputField :: input ('Telephone', 'telephone', 'text', false)}"/>
+            <input id="telephone" th:replace="~{fragments/inputField :: input ('Telephone', 'telephone', 'text', false)}" aria-label="telephone"/>
         </div>
     </div>
     <div class="form-group">
