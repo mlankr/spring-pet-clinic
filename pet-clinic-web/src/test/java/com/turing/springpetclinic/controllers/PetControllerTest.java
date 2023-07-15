@@ -28,16 +28,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class PetControllerTest {
 
 	@Mock
-	PetService petService;
+	private PetService petService;
 
 	@Mock
-	OwnerService ownerService;
+	private OwnerService ownerService;
 
 	@Mock
-	PetTypeService petTypeService;
+	private PetTypeService petTypeService;
 
 	@InjectMocks
-	PetController petController;
+	private PetController petController;
 
 	private MockMvc mockMvc;
 

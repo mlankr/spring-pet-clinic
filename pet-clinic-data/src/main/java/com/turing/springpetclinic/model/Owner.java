@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.*;
+import org.springframework.util.Assert;
 
 import java.util.Set;
 
@@ -35,5 +36,17 @@ public class Owner extends Person {
 		this.city = city;
 		this.telephone = telephone;
 		this.pets = pets;
+	}
+
+	public void addVisit(Long petId, Visit visit) {
+
+		Assert.notNull(petId, "Pet identifier must not be null!");
+		Assert.notNull(visit, "Visit must not be null!");
+
+		Pet pet = this.getPets().stream().filter(p -> p.getId().equals(petId)).findFirst().orElse(null);
+
+		Assert.notNull(pet, "Invalid Pet identifier!");
+
+		pet.setVisits(Set.of(visit));
 	}
 }

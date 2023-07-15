@@ -9,7 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * Created by Milan on 2023/04/18.
@@ -22,11 +22,10 @@ import java.time.LocalDate;
 @Table
 public class Visit extends BaseEntity {
 
-    private LocalDate date;
-    private String description;
+	private Date date;
+	private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "pet_id")
-    private Pet pet;
-
+	@ManyToOne
+	@JoinColumn(name = "pet_id")
+	private Pet pet;
 }

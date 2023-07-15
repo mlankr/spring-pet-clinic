@@ -2,13 +2,12 @@ package com.turing.springpetclinic.bootstrap;
 
 import com.turing.springpetclinic.model.*;
 import com.turing.springpetclinic.services.*;
+import com.turing.springpetclinic.utils.Helper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.Set;
 
 /**
@@ -73,8 +72,7 @@ public class DataLoader implements CommandLineRunner {
 					  .name("Shinobu")
 					  .petType(savedDogType)
 					  .owner(owner1)
-					  .birthDate(Date.from(
-							  LocalDate.now().minusDays(330).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()))
+					  .birthDate(Helper.localDateToDate(LocalDate.now().minusDays(330)))
 					  .build();
 
 		petService.save(pet1);
@@ -95,15 +93,18 @@ public class DataLoader implements CommandLineRunner {
 					  .name("Coco")
 					  .petType(savedCatType)
 					  .owner(owner2)
-					  .birthDate(Date.from(
-							  LocalDate.now().minusDays(120).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()))
+					  .birthDate(Helper.localDateToDate(LocalDate.now().minusDays(120)))
 					  .build();
 
 		petService.save(pet2);
 		owner2.toBuilder().pet(pet2).build();
 		ownerService.save(owner2);
 
-		Visit catVisit = Visit.builder().pet(pet2).date(LocalDate.now()).description("Routine cat check-up").build();
+		Visit catVisit = Visit.builder()
+							  .pet(pet2)
+							  .date(Helper.localDateToDate(LocalDate.now()))
+							  .description("Routine cat check-up")
+							  .build();
 		visitService.save(catVisit);
 
 		Vet vet1 = Vet.builder().firstname("Sam").lastname("Axe").build();

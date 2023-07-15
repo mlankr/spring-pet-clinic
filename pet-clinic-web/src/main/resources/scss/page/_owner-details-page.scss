@@ -4,7 +4,7 @@
   overflow-x: auto;
   @include custom-scrollbar($size: 12px);
 
-  table {
+  .owner-details-table {
     &.table-striped {
       dt {
         min-width: 85px;
