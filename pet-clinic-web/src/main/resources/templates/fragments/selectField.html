@@ -12,7 +12,7 @@
                         </span>
                 </label>
                 <div class="my-2">
-                    <select th:id="${name}" th:name="${name}" class="w-100 p-2 form-control form-select">
+                    <select th:id="${name}" th:name="${name}" class="w-100 p-2 form-control form-select" th:required="${isRequired}">
                         <option th:text="#{selectValue.msg}" value="" th:selected="${currentPetType == null}" disabled></option>
                         <option th:each="item : ${items}" th:value="${item.getId()}"
                                 th:text="${item.getName()}" th:selected="${currentPetType != null && item.getId() == currentPetType.getId()}">
