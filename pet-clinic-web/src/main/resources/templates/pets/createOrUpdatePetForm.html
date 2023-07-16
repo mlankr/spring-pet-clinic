@@ -30,7 +30,7 @@
         </div>
     </div>
 </form>
-<div class="col-sm-offset-2 col-sm-10 mt-4 d-flex justify-content-center">
+<div th:if="${petId != null}" class="col-sm-offset-2 col-sm-10 mt-4 d-flex justify-content-center">
     <a th:href="'/owners/' + ${ownerId} + '/pets/' + ${petId} +'/delete'" th:text=" ${pet != null ? 'Delete Pet' : 'N/A'}" class="btn btn-danger" role="button">N/A</a>
 </div>
 </body>

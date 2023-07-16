@@ -48,12 +48,8 @@ public class OwnerController {
 			// no owners found
 			result.rejectValue("lastname", "notFound", "Not found");
 			return "owners/findOwners";
-		} else if (results.size() == 1) {
-			// 1 owner found
-			owner = results.get(0);
-			return "redirect:/owners/" + owner.getId();
 		} else {
-			// multiple owners found
+			// owners found
 			model.addAttribute("selections", results);
 			return "owners/allOwners";
 		}
@@ -97,5 +93,14 @@ public class OwnerController {
 
 		Owner updatedOwner = ownerService.update(owner, ownerId);
 		return "redirect:/owners/" + updatedOwner.getId();
+	}
+
+	@RequestMapping("/{ownerId}/delete")
+	public String deleteOwner(@PathVariable Long ownerId, @Validated Owner owner, BindingResult result) {
+		if (result.hasErrors() || ownerService.findById(ownerId) == null) {
+			return "owners/createOrUpdateOwnerForm";
+		}
+		ownerService.deleteById(ownerId);
+		return "redirect:/owners";
 	}
 }

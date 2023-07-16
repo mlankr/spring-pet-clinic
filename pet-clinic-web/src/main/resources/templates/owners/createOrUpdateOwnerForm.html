@@ -31,5 +31,8 @@
         </div>
     </div>
 </form>
+<div th:if="${ownerId != null}" class="col-sm-offset-2 col-sm-10 mt-4 d-flex justify-content-center">
+    <a th:href="'/owners/' + ${ownerId} + '/delete'" th:text=" ${owner != null ? 'Delete Owner' : 'N/A'}" class="btn btn-danger" role="button">N/A</a>
+</div>
 </body>
 </html>

@@ -98,7 +98,7 @@ public class PetController {
 	}
 
 	@RequestMapping("/{petId}/delete")
-	public String deleteVisit(@PathVariable Long petId, @Validated Pet pet, BindingResult result,
+	public String deletePet(@PathVariable Long petId, @Validated Pet pet, BindingResult result,
 			@PathVariable Long ownerId) {
 		if (result.hasErrors() || petService.findById(petId) == null) {
 			return "pets/createOrUpdateVisitForm";
