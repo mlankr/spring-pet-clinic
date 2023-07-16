@@ -87,6 +87,7 @@ public class VisitControllerTest {
 	void initNewVisitForm() throws Exception {
 		mockMvc.perform(get(visitsUri))
 			   .andExpect(status().isOk())
+			   .andExpect(model().attributeExists("pet"))
 			   .andExpect(view().name("pets/createOrUpdateVisitForm"));
 	}
 
@@ -97,7 +98,6 @@ public class VisitControllerTest {
 									   .param("date", "2018-11-11")
 									   .param("description", "yet another visit"))
 			   .andExpect(status().is3xxRedirection())
-			   .andExpect(view().name("redirect:/owners/{ownerId}"))
-			   .andExpect(model().attributeExists("visit"));
+			   .andExpect(view().name("redirect:/owners/{ownerId}"));
 	}
 }

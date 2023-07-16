@@ -13,8 +13,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
-
 /**
  * Created by Milan on 2023/07/15.
  */
@@ -43,18 +41,20 @@ public class VisitController {
 			Model model) {
 
 		Pet pet = petService.findById(petId);
+		Visit visit = Visit.builder().pet(pet).build();
+		pet = pet.toBuilder().visit(visit).build();
+
 		model.addAttribute("pet", pet);
 
 		Owner owner = ownerService.findById(petId);
 		model.addAttribute("owner", owner);
 
-		Visit visit = Visit.builder().pet(pet).build();
-		pet.setVisits(Set.of(visit));
 		return visit;
 	}
 
 	@GetMapping("/new")
-	public String initNewVisitForm(@PathVariable Long ownerId, @PathVariable Long petId) {
+	public String initNewVisitForm(@PathVariable Long ownerId, Model model, @PathVariable Long petId) {
+		model.addAttribute("pet", petService.findById(petId));
 		return "pets/createOrUpdateVisitForm";
 	}
 
@@ -64,8 +64,7 @@ public class VisitController {
 		if (result.hasErrors()) {
 			return "pets/createOrUpdateVisitForm";
 		}
-		Visit savedVisit = visitService.save(visit);
-		owner.addVisit(petId, savedVisit);
+		visitService.save(visit);
 		return "redirect:/owners/{ownerId}";
 	}
 }
