@@ -17287,38 +17287,7 @@ hr {
   .footer-container a {
     color: #5fa134;
     text-decoration: none;
-    text-wrap: no-wrap; }
-
-.table-element-container {
-  overflow-x: auto; }
-  .table-element-container::-webkit-scrollbar {
-    width: 12px;
-    /* Mostly for vertical scrollbars */
-    height: 12px;
-    /* Mostly for horizontal scrollbars */ }
-  .table-element-container::-webkit-scrollbar-thumb {
-    /* Foreground */
-    background: #6db33f;
-    border-radius: 12px; }
-  .table-element-container::-webkit-scrollbar-track {
-    /* Background */
-    background: #b6d99f;
-    border-radius: 12px; }
-  .table-element-container {
-    scrollbar-face-color: #6db33f;
-    scrollbar-track-color: #b6d99f; }
-  .table-element-container table.table-striped dt {
-    min-width: 85px; }
-  .table-element-container table.table-condensed {
-    width: 100%; }
-    .table-element-container table.table-condensed .visit-date {
-      width: 35%;
-      min-width: 90px; }
-    .table-element-container table.table-condensed .visit-desc {
-      width: 65%;
-      min-width: 160px; }
-    .table-element-container table.table-condensed tbody tr {
-      margin-bottom: 10px; }
+    text-wrap: none; }
 
 /* --------------- INDEX FILE --------------- */
 @font-face {
@@ -25953,33 +25922,60 @@ table td.action-column {
 hr {
   border-top: 1px dotted #34302D; }
 
-.owners-table-container {
+.table-container {
   overflow-x: auto; }
-  .owners-table-container::-webkit-scrollbar {
+  .table-container::-webkit-scrollbar {
     width: 12px;
     /* Mostly for vertical scrollbars */
     height: 12px;
     /* Mostly for horizontal scrollbars */ }
-  .owners-table-container::-webkit-scrollbar-thumb {
+  .table-container::-webkit-scrollbar-thumb {
     /* Foreground */
     background: #6db33f;
     border-radius: 12px; }
-  .owners-table-container::-webkit-scrollbar-track {
+  .table-container::-webkit-scrollbar-track {
     /* Background */
     background: #b6d99f;
     border-radius: 12px; }
-  .owners-table-container {
+  .table-container {
     scrollbar-face-color: #6db33f;
     scrollbar-track-color: #b6d99f; }
-  .owners-table-container table tr td {
-    min-height: 50px; }
-  .owners-table-container table tr .owner-name, .owners-table-container table tr .owner-telephone {
+  .table-container table tr .pet-type, .table-container table tr .pet-birthdate, .table-container table tr .visit-date, .table-container table tr .action-col {
+    min-width: 100px; }
+  .table-container table tr .owner-name, .table-container table tr .pet-name {
     min-width: 135px; }
-  .owners-table-container table tr .owner-city {
+  .table-container table tr .owner-city, .table-container table tr .owner-telephone {
     min-width: 115px; }
-  .owners-table-container table tr .owner-address, .owners-table-container table tr .owner-pets {
+  .table-container table tr .owner-address, .table-container table tr .owner-pets {
     min-width: 150px; }
-  .owners-table-container table tr .owner-details-link {
+  .table-container table tr .visit-desc {
+    min-width: 225px; }
+  .table-container table tr .owner-details-link {
     color: #5fa134; }
+  .table-container table.table-striped dt {
+    min-width: 85px; }
+  .table-container table .pet-details {
+    width: 20%; }
+    .table-container table .pet-details dl {
+      min-width: 100px; }
+  .table-container table .visit-details {
+    width: 80%; }
+    .table-container table .visit-details.table-condensed {
+      width: 100%; }
+    .table-container table .visit-details .visit-date {
+      width: 20%;
+      min-width: 100px; }
+    .table-container table .visit-details .visit-desc {
+      width: 80%;
+      min-width: 225px; }
+    .table-container table .visit-details .action-col {
+      width: 20%;
+      min-width: 100px; }
+    .table-container table .visit-details .visit-btn {
+      min-width: 140px; }
+      .table-container table .visit-details .visit-btn a {
+        text-wrap: none; }
+    .table-container table .visit-details tbody tr {
+      margin-bottom: 10px; }
 
 /*# sourceMappingURL=../../../../../../target/petclinic.css.map */

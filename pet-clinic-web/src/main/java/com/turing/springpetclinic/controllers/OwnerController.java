@@ -36,7 +36,7 @@ public class OwnerController {
 		return "owners/findOwners";
 	}
 
-	@GetMapping
+	@GetMapping({"", "/"})
 	public String processFindForm(Owner owner, BindingResult result, Model model) {
 		if (owner.getLastname() == null) {
 			owner = owner.toBuilder().lastname("").build();
@@ -55,7 +55,7 @@ public class OwnerController {
 		} else {
 			// multiple owners found
 			model.addAttribute("selections", results);
-			return "owners/ownersList";
+			return "owners/allOwners";
 		}
 	}
 

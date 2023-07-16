@@ -5,79 +5,85 @@
 
 <body>
 <h2>Owner Information</h2>
-<table class="table table-striped" th:object="${owner}">
-    <tr>
-        <th>Name</th>
-        <td><b th:text="*{firstname + ' ' + lastname}"></b></td>
-    </tr>
-    <tr>
-        <th>Address</th>
-        <td th:text="*{address}"></td>
-    </tr>
-    <tr>
-        <th>City</th>
-        <td th:text="*{city}"></td>
-    </tr>
-    <tr>
-        <th>Telephone</th>
-        <td th:text="*{telephone}"></td>
-    </tr>
-</table>
-
-<a th:href="@{__${owner.id}__/edit}" class="btn btn-primary">Edit
-    Owner</a>
-<a th:href="@{__${owner.id}__/pets/new}" class="btn btn-primary">Add
-    New Pet</a>
-
-<br/>
-<br/>
-<br/>
-<h2>Pets and Visits</h2>
-
-<div class="table-element-container">
-    <table class="table table-striped owner-details-table">
-        <tr th:each="pet : ${owner.pets}">
-            <td class="align-top">
-                <dl class="dl-horizontal">
-                    <dt>Name</dt>
-                    <dd th:text="${pet.name}"></dd>
-                    <dt>Birth Date</dt>
-                    <dd
-                            th:text="${#dates.format(pet.birthDate, 'yyyy-MM-dd')}"></dd>
-                    <dt>Type</dt>
-                    <dd th:text="${pet.petType.name}"></dd>
-                </dl>
-            </td>
-            <td class="align-top">
-                <table class="table-condensed">
-                    <thead>
-                    <tr>
-                        <th class="visit-date">Visit Date</th>
-                        <th class="visit-desc">Description</th>
-                    </tr>
-                    </thead>
-                    <tr th:if="${pet.visits.isEmpty()}">
-                        <td>N/A</td>
-                        <td>N/A</td>
-                    </tr>
-                    <tr th:each="visit : ${pet.visits}">
-                        <td th:text="${visit.date == null ? 'N/A' : #dates.format(visit.date, 'yyyy-MM-dd')}">N/A
-                        </td>
-                        <td th:text="${visit?.description ?: 'N/A'}">N/A</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a th:href="@{__${owner.id}__/pets/__${pet.id}__/edit}" class="btn btn-sm btn-success mt-3 d-inline-block">Edit
-                                Pet</a></td>
-                        <td>
-                            <a th:href="@{__${owner.id}__/pets/__${pet.id}__/visits/new}" class="btn btn-sm btn-success mt-3 d-inline-block">Add
-                                Visit</a></td>
-                    </tr>
-                </table>
-            </td>
+<div class="table-container">
+    <table class="table table-striped" th:object="${owner}">
+        <tr>
+            <th class="owner-name">Name</th>
+            <td><b th:text="*{firstname + ' ' + lastname}"></b></td>
         </tr>
-
+        <tr>
+            <th class="owner-address">Address</th>
+            <td th:text="*{address}" class="owner-address"></td>
+        </tr>
+        <tr>
+            <th class="owner-city">City</th>
+            <td th:text="*{city}"></td>
+        </tr>
+        <tr>
+            <th class="owner-telephone">Telephone</th>
+            <td th:text="*{telephone}"></td>
+        </tr>
     </table>
+</div>
+
+<div class="mt-3">
+    <a th:href="@{__${owner.id}__/edit}" class="btn btn-primary me-3">Edit
+        Owner</a>
+    <a th:href="@{__${owner.id}__/pets/new}" class="btn btn-primary">Add
+        New Pet</a>
+</div>
+
+<div class="mt-5">
+    <h2>Pets and Visits</h2>
+    <div class="table-container">
+        <table class="table table-striped">
+            <tr th:if="${owner?.pets?.isEmpty()}">
+                <td class="text-center">N/A</td>
+            </tr>
+            <tr th:each="pet : ${owner.pets}">
+                <td class="align-top pet-details">
+                    <dl class="dl-horizontal">
+                        <dt>Name</dt>
+                        <dd th:text="${pet.name}"></dd>
+                        <dt>Birth Date</dt>
+                        <dd
+                                th:text="${#dates.format(pet.birthDate, 'yyyy-MM-dd')}"></dd>
+                        <dt>Type</dt>
+                        <dd th:text="${pet.petType.name}"></dd>
+                    </dl>
+                </td>
+                <td class="align-top ps-3 visit-details">
+                    <table class="table table-condensed border-secondary">
+                        <tr>
+                            <th class="visit-date">Visit Date</th>
+                            <th class="visit-desc">Description</th>
+                        </tr>
+                        <tbody>
+                        <tr th:if="${pet?.visits?.isEmpty()}">
+                            <td>N/A</td>
+                            <td>N/A</td>
+                        </tr>
+                        <tr th:each="visit : ${pet.visits}">
+                            <td th:text="${visit.date == null ? 'N/A' : #dates.format(visit.date, 'yyyy-MM-dd')}">N/A
+                            </td>
+                            <td th:text="${visit?.description ?: 'N/A'}">N/A</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="my-3 ">
+                        <div class="mb-3">
+                            <a th:href="@{__${owner.id}__/pets/__${pet.id}__/edit}" class="btn btn-sm btn-success d-inline-block">Edit
+                                or Delete Pet</a>
+                        </div>
+                        <div class="visit-btn">
+                            <a th:href="@{__${owner.id}__/pets/__${pet.id}__/visits/new}" class="btn btn-sm btn-success d-inline-block">Add
+                                or Delete Visit</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 </body>
 

@@ -1,0 +1,86 @@
+@import '../base';
+@import '../base/mixin/crossbrowser';
+
+.table-container {
+  overflow-x: auto;
+  @include custom-scrollbar($size: 12px);
+
+  table {
+    tr {
+      .pet-type, .pet-birthdate, .visit-date, .action-col {
+        min-width: 100px;
+      }
+
+      .owner-name, .pet-name {
+        min-width: 135px;
+      }
+
+      .owner-city, .owner-telephone {
+        min-width: 115px;
+      }
+
+      .owner-address, .owner-pets {
+        min-width: 150px;
+      }
+
+      .visit-desc {
+        min-width: 225px;
+      }
+
+      .owner-details-link {
+        color: $spring-dark-green;
+      }
+    }
+
+    &.table-striped {
+      dt {
+        min-width: 85px;
+      }
+    }
+
+    .pet-details {
+      width: 20%;
+
+      dl {
+        min-width: 100px;
+      }
+    }
+
+    .visit-details {
+      width: 80%;
+
+      &.table-condensed {
+        width: 100%;
+      }
+
+      .visit-date {
+        width: 20%;
+        min-width: 100px;
+      }
+
+      .visit-desc {
+        width: 80%;
+        min-width: 225px;
+      }
+
+      .action-col {
+        width: 20%;
+        min-width: 100px;
+      }
+
+      .visit-btn {
+        min-width: 140px;
+
+        a {
+          text-wrap: none;
+        }
+      }
+
+      tbody {
+        tr {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}

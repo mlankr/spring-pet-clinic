@@ -3,22 +3,26 @@
 
 <body>
 
-<table class="table table-striped visit-form-summary-table">
-    <thead>
-    <tr>
-        <th>Pet Name</th>
-        <th>Birth Date</th>
-        <th>Type</th>
-        <th>Owner</th>
-    </tr>
-    </thead>
-    <tr>
-        <td th:text="${pet.name}"></td>
-        <td th:text="${pet.birthDate}"></td>
-        <td th:text="${pet.petType.getName()}"></td>
-        <td th:text="${owner?.firstname + ' ' + owner?.lastname}"></td>
-    </tr>
-</table>
+<div class="table-container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th class="pet-name">Pet Name</th>
+            <th class="pet-birthdate">Birth Date</th>
+            <th class="pet-type">Type</th>
+            <th class="owner-name">Owner</th>
+        </tr>
+        </thead>
+        <tr>
+            <td th:text="${pet.name}"></td>
+            <td th:text="${#dates.format(pet.birthDate, 'yyyy-MM-dd')}"></td>
+            <td th:text="${pet.petType.getName()}"></td>
+            <td>
+                <a class="owner-details-link" th:href="@{/owners/__${owner.id}__}" th:text="${owner.firstname + ' ' + owner.lastname}"></a>
+            </td>
+        </tr>
+    </table>
+</div>
 
 <div class="mt-5">
     <h2>
@@ -28,7 +32,7 @@
     <form th:object="${visit}" class="form-horizontal needs-validation" method="post" novalidate>
         <div class="form-group has-feedback">
             <input th:replace="~{fragments/inputField :: input ('Date', 'date', 'date', true)}" aria-label="date"/>
-            <input th:replace="~{fragments/inputField :: input ('Description', 'description', 'text', true)}" aria-label="description"/>
+            <input th:replace="~{fragments/inputField :: input ('Description', 'description', 'textarea', true)}" aria-label="description"/>
         </div>
 
         <div class="form-group">
@@ -42,22 +46,28 @@
 
 <div class="mt-5">
     <h3>Previous Visits</h3>
-    <table class="table table-striped previous-visits-table">
-        <thead>
-        <tr>
-            <th>Visit Date</th>
-            <th>Description</th>
-        </tr>
-        </thead>
-        <tr th:if="${pet.visits.isEmpty()}">
-            <td>N/A</td>
-            <td>N/A</td>
-        </tr>
-        <tr th:each="visit : ${pet.visits}">
-            <td th:text="${visit.date == null ? 'N/A' : #dates.format(visit.date, 'yyyy-MM-dd')}">N/A</td>
-            <td th:text=" ${visit?.description ?: 'N/A'}">N/A</td>
-        </tr>
-    </table>
+    <div class="table-container">
+        <table class="table table-striped visit-table">
+            <thead>
+            <tr>
+                <th class="visit-date">Visit Date</th>
+                <th class="visit-desc">Description</th>
+                <th th:if="${!pet.visits.isEmpty()}" class="action-col">Action</th>
+            </tr>
+            </thead>
+            <tr th:if="${pet.visits.isEmpty()}">
+                <td>N/A</td>
+                <td>N/A</td>
+            </tr>
+            <tr th:each="visit : ${pet.visits}">
+                <td th:text="${visit.date == null ? 'N/A' : #dates.format(visit.date, 'yyyy-MM-dd')}">N/A</td>
+                <td th:text=" ${visit?.description ?: 'N/A'}">N/A</td>
+                <td th:if="${!pet.visits.isEmpty()}">
+                    <a th:href="@{__${visit.id}__/delete}" th:text=" ${visit != null ? 'Delete' : 'N/A'}" class="btn btn-sm btn-danger">N/A</a>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 </body>
 </html>

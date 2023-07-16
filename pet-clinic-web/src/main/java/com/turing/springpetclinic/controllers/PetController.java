@@ -15,6 +15,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -94,5 +95,19 @@ public class PetController {
 			owner.setPets(Set.of(updatedPet));
 			return "redirect:/owners/" + owner.getId();
 		}
+	}
+
+	@RequestMapping("/{petId}/delete")
+	public String deleteVisit(@PathVariable Long petId, @Validated Pet pet, BindingResult result,
+			@PathVariable Long ownerId) {
+		if (result.hasErrors() || petService.findById(petId) == null) {
+			return "pets/createOrUpdateVisitForm";
+		}
+
+		Optional.ofNullable(ownerService.findById(ownerId))
+				.ifPresent(o -> o.getPets().removeIf(p -> p != null && p.getId().equals(petId)));
+
+		petService.deleteById(petId);
+		return "redirect:/owners/" + ownerId;
 	}
 }

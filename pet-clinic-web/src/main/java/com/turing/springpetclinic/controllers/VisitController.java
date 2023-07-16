@@ -44,10 +44,10 @@ public class VisitController {
 		Visit visit = Visit.builder().pet(pet).build();
 		pet = pet.toBuilder().visit(visit).build();
 
-		model.addAttribute("pet", pet);
-
-		Owner owner = ownerService.findById(petId);
+		Owner owner = ownerService.findById(ownerId);
 		model.addAttribute("owner", owner);
+
+		model.addAttribute("pet", pet);
 
 		return visit;
 	}
@@ -59,12 +59,23 @@ public class VisitController {
 	}
 
 	@PostMapping("/new")
-	public String processNewVisitForm(@PathVariable Long petId, @Validated Visit visit, Owner owner,
-			BindingResult result, @PathVariable Long ownerId) {
+	public String processNewVisitForm(@PathVariable Long petId, @Validated Visit visit, BindingResult result,
+			@PathVariable Long ownerId) {
 		if (result.hasErrors()) {
 			return "pets/createOrUpdateVisitForm";
 		}
 		visitService.save(visit);
 		return "redirect:/owners/{ownerId}";
+	}
+
+	@RequestMapping("/{visitId}/delete")
+	public String deleteVisit(@PathVariable Long visitId, @PathVariable Long petId, @Validated Visit visit,
+			BindingResult result, @PathVariable Long ownerId) {
+		if (result.hasErrors() || visitService.findById(visitId) == null) {
+			return "pets/createOrUpdateVisitForm";
+		}
+		petService.findById(petId).getVisits().removeIf(v -> v.getId().equals(visitId));
+		visitService.deleteById(visitId);
+		return "redirect:/owners/{ownerId}/pets/" + petId + "/visits/new";
 	}
 }

@@ -1,9 +1,6 @@
 package com.turing.springpetclinic.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -23,6 +20,7 @@ public class Visit extends BaseEntity {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date date;
 
+	@Column(length = 1024)
 	private String description;
 
 	@ManyToOne

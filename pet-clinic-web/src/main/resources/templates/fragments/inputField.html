@@ -13,8 +13,9 @@
                             <span th:text="${isRequired} ? '*' : ''" class="text-danger"></span>
                         </span>
                     </label>
-                    <input th:id="${name + '' + type}" th:case="'text'" class="form-control mt-2" type="text" th:field="*{__${name}__}" th:required="${isRequired}"/>
-                    <input id="date-input" th:case="'date'" class="form-control mt-2" type="date" th:field="*{__${name}__}" th:required="${isRequired}"/>
+                    <input th:id="${name + '' + type}" th:case="'text'" class="form-control mt-2" type="text" th:field="*{__${name}__}" th:required="${isRequired}" aria-label=""/>
+                    <input id="date-input" th:case="'date'" class="form-control mt-2" type="date" th:field="*{__${name}__}" th:required="${isRequired}" aria-label=""/>
+                    <textarea th:id="${name + '' + type}" th:case="'textarea'" class="form-control mt-2" rows="3" th:field="*{__${name}__}" th:required="${isRequired}" aria-label=""></textarea>
                 </div>
                 <span th:if="${valid}"
                       class="fa fa-ok form-control-feedback"
