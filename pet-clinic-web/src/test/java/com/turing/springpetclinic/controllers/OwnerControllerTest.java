@@ -74,7 +74,7 @@ class OwnerControllerTest {
 
 		mockMvc.perform(get("/owners"))
 			   .andExpect(status().isOk())
-			   .andExpect(view().name("owners/ownersList"))
+			   .andExpect(view().name("owners/allOwners"))
 			   .andExpect(model().attribute("selections", hasSize(2)));
 	}
 
@@ -88,9 +88,7 @@ class OwnerControllerTest {
 		});
 
 
-		mockMvc.perform(get("/owners"))
-			   .andExpect(status().is3xxRedirection())
-			   .andExpect(view().name("redirect:/owners/1"));
+		mockMvc.perform(get("/owners")).andExpect(status().isOk()).andExpect(view().name("owners/allOwners"));
 	}
 
 	@Test
