@@ -48,19 +48,19 @@ class PetControllerTest {
 	@BeforeEach
 	void setUp() {
 		Owner owner = Owner.builder()
-				.build();
+			.build();
 
 		Set<PetType> petTypes =
-				Set.of(PetType.builder()
-						.id(1L)
-						.name("Dog")
-						.build(), PetType.builder()
-						.id(2L)
-						.name("Cat")
-						.build());
+			Set.of(PetType.builder()
+				.id(1L)
+				.name("Dog")
+				.build(), PetType.builder()
+				.id(2L)
+				.name("Cat")
+				.build());
 
 		mockMvc = MockMvcBuilders.standaloneSetup(petController)
-				.build();
+			.build();
 
 		when(ownerService.findById(ArgumentMatchers.any())).thenAnswer(invocation -> {
 			owner.setId(1L); // Set the desired ID
@@ -73,20 +73,20 @@ class PetControllerTest {
 	@Test
 	void initCreationForm() throws Exception {
 		mockMvc.perform(get("/owners/1/pets/new"))
-				.andExpect(status().isOk())
-				.andExpect(model().attributeExists("owner"))
-				.andExpect(model().attributeExists("pet"))
-				.andExpect(view().name("pets/createOrUpdatePetForm"));
+			.andExpect(status().isOk())
+			.andExpect(model().attributeExists("owner"))
+			.andExpect(model().attributeExists("pet"))
+			.andExpect(view().name("pets/createOrUpdatePetForm"));
 	}
 
 	@Test
 	void processCreationForm() throws Exception {
 		when(petService.save(any())).thenReturn(Pet.builder()
-				.id(1L)
-				.build());
+			.id(1L)
+			.build());
 		mockMvc.perform(post("/owners/1/pets/new"))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(view().name("redirect:/owners/1"));
+			.andExpect(status().is3xxRedirection())
+			.andExpect(view().name("redirect:/owners/1"));
 
 		verify(petService, times(1)).save(any());
 	}
@@ -94,26 +94,26 @@ class PetControllerTest {
 	@Test
 	void initUpdateForm() throws Exception {
 		when(petService.findById(anyLong())).thenReturn(Pet.builder()
-				.id(2L)
-				.name("Katy")
-				.build());
+			.id(2L)
+			.name("Katy")
+			.build());
 
 		mockMvc.perform(get("/owners/1/pets/2/edit"))
-				.andExpect(status().isOk())
-				.andExpect(model().attributeExists("owner"))
-				.andExpect(model().attributeExists("pet"))
-				.andExpect(view().name("pets/createOrUpdatePetForm"));
+			.andExpect(status().isOk())
+			.andExpect(model().attributeExists("owner"))
+			.andExpect(model().attributeExists("pet"))
+			.andExpect(view().name("pets/createOrUpdatePetForm"));
 	}
 
 	@Test
 	void processUpdateForm() throws Exception {
 		when(petService.update(any(), anyLong())).thenReturn(Pet.builder()
-				.id(1L)
-				.build());
+			.id(1L)
+			.build());
 
 		mockMvc.perform(post("/owners/1/pets/2/edit"))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(view().name("redirect:/owners/1"));
+			.andExpect(status().is3xxRedirection())
+			.andExpect(view().name("redirect:/owners/1"));
 
 		verify(petService, times(1)).update(any(), anyLong());
 	}

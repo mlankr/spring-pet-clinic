@@ -35,10 +35,10 @@ class VetControllerTest {
 	@BeforeEach
 	void setUp() {
 		vets = Set.of(Vet.builder()
-				.build());
+			.build());
 
 		mockMvc = MockMvcBuilders.standaloneSetup(controller)
-				.build();
+			.build();
 	}
 
 	@Test
@@ -46,12 +46,12 @@ class VetControllerTest {
 		when(vetService.findAll()).thenReturn(vets);
 
 		mockMvc.perform(MockMvcRequestBuilders.get("/vets"))
-				.andExpect(MockMvcResultMatchers.status()
-						.isOk())
-				.andExpect(MockMvcResultMatchers.view()
-						.name("vets/index"))
-				.andExpect(MockMvcResultMatchers.model()
-						.attribute("vets", hasSize(1)));
+			.andExpect(MockMvcResultMatchers.status()
+				.isOk())
+			.andExpect(MockMvcResultMatchers.view()
+				.name("vets/index"))
+			.andExpect(MockMvcResultMatchers.model()
+				.attribute("vets", hasSize(1)));
 
 		verify(vetService, times(1)).findAll();
 	}
@@ -61,12 +61,12 @@ class VetControllerTest {
 		when(vetService.findAll()).thenReturn(vets);
 
 		mockMvc.perform(MockMvcRequestBuilders.get("/vets/index"))
-				.andExpect(MockMvcResultMatchers.status()
-						.isOk())
-				.andExpect(MockMvcResultMatchers.view()
-						.name("vets/index"))
-				.andExpect(MockMvcResultMatchers.model()
-						.attribute("vets", hasSize(1)));
+			.andExpect(MockMvcResultMatchers.status()
+				.isOk())
+			.andExpect(MockMvcResultMatchers.view()
+				.name("vets/index"))
+			.andExpect(MockMvcResultMatchers.model()
+				.attribute("vets", hasSize(1)));
 
 		verify(vetService, times(1)).findAll();
 	}

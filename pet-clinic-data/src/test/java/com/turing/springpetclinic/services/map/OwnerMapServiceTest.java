@@ -28,28 +28,28 @@ class OwnerMapServiceTest {
 	@BeforeEach
 	void setUp() {
 		ownerMapService.save(Owner.builder()
-				.lastname(lastName)
-				.build());
+			.lastname(lastName)
+			.build());
 	}
 
 	@Test
 	void findAll() {
 		assertEquals(ownerMapService.findAll()
-				.size(), 1);
+			.size(), 1);
 	}
 
 	@Test
 	void delete() {
 		ownerMapService.delete(ownerMapService.findById(ownerId));
 		assertEquals(0, ownerMapService.findAll()
-				.size());
+			.size());
 	}
 
 	@Test
 	void save() {
 		Long secondOwnerId = 2L;
 		Owner owner2 = Owner.builder()
-				.build();
+			.build();
 		Owner savedOwner = ownerMapService.save(owner2);
 		assertEquals(secondOwnerId, savedOwner.getId());
 	}
@@ -58,19 +58,19 @@ class OwnerMapServiceTest {
 	void deleteById() {
 		ownerMapService.deleteById(ownerId);
 		assertEquals(0, ownerMapService.findAll()
-				.size());
+			.size());
 	}
 
 	@Test
 	void findById() {
 		assertEquals(ownerId, ownerMapService.findById(ownerId)
-				.getId());
+			.getId());
 	}
 
 	@Test
 	void findByLastName() {
 		assertEquals(lastName, ownerMapService.findByLastName(lastName)
-				.getLastname());
+			.getLastname());
 	}
 
 	@Test

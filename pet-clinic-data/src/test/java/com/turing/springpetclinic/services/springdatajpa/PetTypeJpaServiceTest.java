@@ -32,7 +32,7 @@ class PetTypeJpaServiceTest {
 	@BeforeEach
 	void setUp() {
 		petType = PetType.builder()
-				.build();
+			.build();
 	}
 
 	@Test
@@ -40,7 +40,7 @@ class PetTypeJpaServiceTest {
 		when(petTypeRepository.findAll()).thenReturn(Set.of(petType));
 
 		assertEquals(1, service.findAll()
-				.size());
+			.size());
 		verify(petTypeRepository, times(1)).findAll();
 	}
 
@@ -55,7 +55,7 @@ class PetTypeJpaServiceTest {
 	@Test
 	void save() {
 		PetType petType2 = PetType.builder()
-				.build();
+			.build();
 
 		when(petTypeRepository.save(any())).thenReturn(petType2);
 
@@ -70,7 +70,7 @@ class PetTypeJpaServiceTest {
 		service.delete(petType);
 
 		assertEquals(0, service.findAll()
-				.size());
+			.size());
 		verify(petTypeRepository, times(1)).delete(petType);
 	}
 
@@ -79,7 +79,7 @@ class PetTypeJpaServiceTest {
 		service.deleteById(petTypeId);
 
 		assertEquals(0, service.findAll()
-				.size());
+			.size());
 		verify(petTypeRepository, times(1)).deleteById(petTypeId);
 	}
 }

@@ -58,21 +58,21 @@ public class VisitControllerTest {
 		long ownerId = 1L;
 
 		pet = Pet.builder()
-				.id(petId)
-				.birthDate(Helper.localDateToDate(LocalDate.of(2018, 11, 13)))
-				.name("Cutie")
-				.visits(new HashSet<>())
-				.owner(owner)
-				.petType(PetType.builder()
-						.name("Dog")
-						.build())
-				.build();
+			.id(petId)
+			.birthDate(Helper.localDateToDate(LocalDate.of(2018, 11, 13)))
+			.name("Cutie")
+			.visits(new HashSet<>())
+			.owner(owner)
+			.petType(PetType.builder()
+				.name("Dog")
+				.build())
+			.build();
 
 		owner = Owner.builder()
-				.firstname("Joe")
-				.lastname("Doe")
-				.pet(pet)
-				.build();
+			.firstname("Joe")
+			.lastname("Doe")
+			.pet(pet)
+			.build();
 
 		when(petService.findById(anyLong())).thenReturn(pet);
 
@@ -82,24 +82,24 @@ public class VisitControllerTest {
 		visitsUri = visitsUriTemplate.expand(uriVariables);
 
 		mockMvc = MockMvcBuilders.standaloneSetup(visitController)
-				.build();
+			.build();
 	}
 
 	@Test
 	void initNewVisitForm() throws Exception {
 		mockMvc.perform(get(visitsUri))
-				.andExpect(status().isOk())
-				.andExpect(model().attributeExists("pet"))
-				.andExpect(view().name("pets/createOrUpdateVisitForm"));
+			.andExpect(status().isOk())
+			.andExpect(model().attributeExists("pet"))
+			.andExpect(view().name("pets/createOrUpdateVisitForm"));
 	}
 
 
 	@Test
 	void processNewVisitForm() throws Exception {
 		mockMvc.perform(post(visitsUri).contentType(MediaType.APPLICATION_FORM_URLENCODED)
-						.param("date", "2018-11-11")
-						.param("description", "yet another visit"))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(view().name("redirect:/owners/{ownerId}"));
+				.param("date", "2018-11-11")
+				.param("description", "yet another visit"))
+			.andExpect(status().is3xxRedirection())
+			.andExpect(view().name("redirect:/owners/{ownerId}"));
 	}
 }

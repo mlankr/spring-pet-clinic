@@ -34,8 +34,8 @@ class OwnerJpaServiceTest {
 	@BeforeEach
 	void setUp() {
 		owner = Owner.builder()
-				.lastname(lastname)
-				.build();
+			.lastname(lastname)
+			.build();
 	}
 
 	@Test
@@ -43,7 +43,7 @@ class OwnerJpaServiceTest {
 		when(ownerRepository.findAll()).thenReturn(Set.of(owner));
 
 		assertEquals(1, service.findAll()
-				.size());
+			.size());
 		verify(ownerRepository, times(1)).findAll();
 	}
 
@@ -66,7 +66,7 @@ class OwnerJpaServiceTest {
 	@Test
 	void save() {
 		Owner owner2 = Owner.builder()
-				.build();
+			.build();
 
 		when(ownerRepository.save(any())).thenReturn(owner2);
 
@@ -81,7 +81,7 @@ class OwnerJpaServiceTest {
 		service.delete(owner);
 
 		assertEquals(0, service.findAll()
-				.size());
+			.size());
 		verify(ownerRepository, times(1)).delete(owner);
 	}
 
@@ -90,7 +90,7 @@ class OwnerJpaServiceTest {
 		service.deleteById(ownerId);
 
 		assertEquals(0, service.findAll()
-				.size());
+			.size());
 		verify(ownerRepository, times(1)).deleteById(ownerId);
 	}
 

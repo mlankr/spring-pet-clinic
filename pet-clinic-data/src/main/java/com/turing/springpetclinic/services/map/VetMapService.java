@@ -35,16 +35,16 @@ public class VetMapService extends AbstractMapService<Vet, Long> implements VetS
 	public Vet save(Vet vet) {
 
 		if (vet.getSpecialties()
-				.size() > 0) {
+			.size() > 0) {
 			vet.getSpecialties()
-					.forEach(speciality -> {
-						if (speciality.getId() == null) {
-							Speciality savedSpecialty = specialityService.save(speciality);
-							speciality.toBuilder()
-									.id(savedSpecialty.getId())
-									.build();
-						}
-					});
+				.forEach(speciality -> {
+					if (speciality.getId() == null) {
+						Speciality savedSpecialty = specialityService.save(speciality);
+						speciality.toBuilder()
+							.id(savedSpecialty.getId())
+							.build();
+					}
+				});
 		}
 		return super.save(vet);
 	}

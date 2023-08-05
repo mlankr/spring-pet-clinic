@@ -1,11 +1,19 @@
 package com.turing.springpetclinic.model;
 
-import jakarta.persistence.*;
-import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
-
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import java.util.Date;
 import java.util.Set;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Singular;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * Created by Milan on 2023/02/14.
@@ -36,7 +44,7 @@ public class Pet extends BaseEntity {
 
 	@Builder(toBuilder = true)
 	public Pet(@Builder.ObtainVia(method = "getId") Long id, String name, Date birthDate, PetType petType, Owner owner,
-			@Singular Set<Visit> visits) {
+		@Singular Set<Visit> visits) {
 		super(id);
 		this.name = name;
 		this.birthDate = birthDate;

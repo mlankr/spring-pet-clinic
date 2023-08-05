@@ -32,7 +32,7 @@ class VisitJpaServiceTest {
 	@BeforeEach
 	void setUp() {
 		visit = Visit.builder()
-				.build();
+			.build();
 	}
 
 	@Test
@@ -40,7 +40,7 @@ class VisitJpaServiceTest {
 		when(visitRepository.findAll()).thenReturn(Set.of(visit));
 
 		assertEquals(1, service.findAll()
-				.size());
+			.size());
 		verify(visitRepository, times(1)).findAll();
 	}
 
@@ -55,7 +55,7 @@ class VisitJpaServiceTest {
 	@Test
 	void save() {
 		Visit petType2 = Visit.builder()
-				.build();
+			.build();
 
 		when(visitRepository.save(any())).thenReturn(petType2);
 
@@ -70,7 +70,7 @@ class VisitJpaServiceTest {
 		service.delete(visit);
 
 		assertEquals(0, service.findAll()
-				.size());
+			.size());
 		verify(visitRepository, times(1)).delete(visit);
 	}
 
@@ -79,7 +79,7 @@ class VisitJpaServiceTest {
 		service.deleteById(visitId);
 
 		assertEquals(0, service.findAll()
-				.size());
+			.size());
 		verify(visitRepository, times(1)).deleteById(visitId);
 	}
 }

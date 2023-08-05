@@ -26,14 +26,14 @@ public class PetJpaService implements PetService {
 	public Set<Pet> findAll() {
 		Set<Pet> pets = new HashSet<>();
 		petRepository.findAll()
-				.forEach(pets::add);
+			.forEach(pets::add);
 		return pets;
 	}
 
 	@Override
 	public Pet findById(Long id) {
 		return petRepository.findById(id)
-				.orElse(null);
+			.orElse(null);
 	}
 
 	@Override

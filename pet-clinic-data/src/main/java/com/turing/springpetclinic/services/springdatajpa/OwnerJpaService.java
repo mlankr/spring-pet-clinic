@@ -27,14 +27,14 @@ public class OwnerJpaService implements OwnerService {
 	public Set<Owner> findAll() {
 		Set<Owner> owners = new HashSet<>();
 		ownerRepository.findAll()
-				.forEach(owners::add);
+			.forEach(owners::add);
 		return owners;
 	}
 
 	@Override
 	public Owner findById(Long id) {
 		return ownerRepository.findById(id)
-				.orElse(null);
+			.orElse(null);
 	}
 
 	@Override

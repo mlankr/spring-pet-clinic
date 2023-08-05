@@ -37,7 +37,7 @@ public class OwnerController {
 	@RequestMapping("/find")
 	public String findOwners(Model model) {
 		model.addAttribute("owner", Owner.builder()
-				.build());
+			.build());
 		return "owners/findOwners";
 	}
 
@@ -45,8 +45,8 @@ public class OwnerController {
 	public String processFindForm(Owner owner, BindingResult result, Model model) {
 		if (owner.getLastname() == null) {
 			owner = owner.toBuilder()
-					.lastname("")
-					.build();
+				.lastname("")
+				.build();
 		}
 
 		List<Owner> results = ownerService.findAllByLastNameLike("%" + owner.getLastname() + "%");
@@ -73,7 +73,7 @@ public class OwnerController {
 	@GetMapping("/new")
 	public String initCreationForm(Model model) {
 		model.addAttribute("owner", Owner.builder()
-				.build());
+			.build());
 		return "owners/createOrUpdateOwnerForm";
 	}
 

@@ -27,8 +27,8 @@ public class VisitMapService extends AbstractMapService<Visit, Long> implements 
 	@Override
 	public Visit save(Visit visit) {
 		if (visit.getPet() == null || visit.getPet()
-				.getOwner() == null || visit.getPet()
-				.getPetType() == null) {
+			.getOwner() == null || visit.getPet()
+			.getPetType() == null) {
 			throw new RuntimeException("Invalid Visit");
 		}
 		return super.save(visit);
@@ -47,9 +47,9 @@ public class VisitMapService extends AbstractMapService<Visit, Long> implements 
 	@Override
 	public Set<Visit> findVisitsByPet(long petId) {
 		return findAll().stream()
-				.filter(v -> v.getPet()
-						.getId()
-						.equals(petId))
-				.collect(Collectors.toSet());
+			.filter(v -> v.getPet()
+				.getId()
+				.equals(petId))
+			.collect(Collectors.toSet());
 	}
 }

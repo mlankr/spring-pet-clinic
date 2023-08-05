@@ -57,20 +57,20 @@ public class PetController {
 	@GetMapping("/new")
 	public String initCreationForm(Owner owner, Model model, @PathVariable Long ownerId) {
 		Pet pet = Pet.builder()
-				.build();
+			.build();
 		owner.setPets(Set.of(pet));
 		pet = pet.toBuilder()
-				.owner(owner)
-				.build();
+			.owner(owner)
+			.build();
 		model.addAttribute("pet", pet);
 		return "pets/createOrUpdatePetForm";
 	}
 
 	@PostMapping("/new")
 	public String processCreationForm(Owner owner, @Validated Pet pet, BindingResult result, Model model,
-			@PathVariable Long ownerId) {
+		@PathVariable Long ownerId) {
 		if (StringUtils.hasLength(pet.getName()) && pet.isNew() && owner.getPets()
-				.contains(pet)) {
+			.contains(pet)) {
 			result.rejectValue("name", "duplicate", "already exists");
 		}
 		if (result.hasErrors()) {
@@ -78,8 +78,8 @@ public class PetController {
 			return "pets/createOrUpdatePetForm";
 		} else {
 			pet = pet.toBuilder()
-					.owner(owner)
-					.build();
+				.owner(owner)
+				.build();
 			Pet savedPet = petService.save(pet);
 			owner.setPets(Set.of(savedPet));
 			return "redirect:/owners/" + owner.getId();
@@ -94,17 +94,17 @@ public class PetController {
 
 	@PostMapping("/{petId}/edit")
 	public String processUpdateForm(@Validated Pet pet, BindingResult result, Owner owner, Model model,
-			@PathVariable Long ownerId, @PathVariable Long petId) {
+		@PathVariable Long ownerId, @PathVariable Long petId) {
 		if (result.hasErrors()) {
 			pet = pet.toBuilder()
-					.owner(owner)
-					.build();
+				.owner(owner)
+				.build();
 			model.addAttribute("pet", pet);
 			return "pets/createOrUpdatePetForm";
 		} else {
 			pet = pet.toBuilder()
-					.owner(owner)
-					.build();
+				.owner(owner)
+				.build();
 			Pet updatedPet = petService.update(pet, petId);
 			owner.setPets(Set.of(updatedPet));
 			return "redirect:/owners/" + owner.getId();
@@ -113,15 +113,15 @@ public class PetController {
 
 	@RequestMapping("/{petId}/delete")
 	public String deletePet(@PathVariable Long petId, @Validated Pet pet, BindingResult result,
-			@PathVariable Long ownerId) {
+		@PathVariable Long ownerId) {
 		if (result.hasErrors() || petService.findById(petId) == null) {
 			return "pets/createOrUpdateVisitForm";
 		}
 
 		Optional.ofNullable(ownerService.findById(ownerId))
-				.ifPresent(o -> o.getPets()
-						.removeIf(p -> p != null && p.getId()
-								.equals(petId)));
+			.ifPresent(o -> o.getPets()
+				.removeIf(p -> p != null && p.getId()
+					.equals(petId)));
 
 		petService.deleteById(petId);
 		return "redirect:/owners/" + ownerId;

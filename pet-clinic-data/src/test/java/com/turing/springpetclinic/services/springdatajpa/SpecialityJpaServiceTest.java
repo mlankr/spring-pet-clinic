@@ -32,7 +32,7 @@ class SpecialityJpaServiceTest {
 	@BeforeEach
 	void setUp() {
 		speciality = Speciality.builder()
-				.build();
+			.build();
 	}
 
 	@Test
@@ -40,7 +40,7 @@ class SpecialityJpaServiceTest {
 		when(specialityRepository.findAll()).thenReturn(Set.of(speciality));
 
 		assertEquals(1, service.findAll()
-				.size());
+			.size());
 		verify(specialityRepository, times(1)).findAll();
 	}
 
@@ -55,7 +55,7 @@ class SpecialityJpaServiceTest {
 	@Test
 	void save() {
 		Speciality speciality2 = Speciality.builder()
-				.build();
+			.build();
 
 		when(specialityRepository.save(any())).thenReturn(speciality2);
 
@@ -70,7 +70,7 @@ class SpecialityJpaServiceTest {
 		service.delete(speciality);
 
 		assertEquals(0, service.findAll()
-				.size());
+			.size());
 		verify(specialityRepository, times(1)).delete(speciality);
 	}
 
@@ -79,7 +79,7 @@ class SpecialityJpaServiceTest {
 		service.deleteById(specialityId);
 
 		assertEquals(0, service.findAll()
-				.size());
+			.size());
 		verify(specialityRepository, times(1)).deleteById(specialityId);
 	}
 }

@@ -15,20 +15,20 @@ class PetMapServiceTest {
 	void setUp() {
 		petMapService = new PetMapService();
 		petMapService.save(Pet.builder()
-				.build());
+			.build());
 	}
 
 	@Test
 	void findAll() {
 		assertEquals(1, petMapService.findAll()
-				.size());
+			.size());
 	}
 
 	@Test
 	void delete() {
 		petMapService.delete(petMapService.findById(petId));
 		assertEquals(0, petMapService.findAll()
-				.size());
+			.size());
 	}
 
 	@Test
@@ -36,7 +36,7 @@ class PetMapServiceTest {
 		Long secondId = 2L;
 
 		Pet savedPet = petMapService.save(Pet.builder()
-				.build());
+			.build());
 		assertEquals(secondId, savedPet.getId());
 	}
 
@@ -44,12 +44,12 @@ class PetMapServiceTest {
 	void deleteById() {
 		petMapService.deleteById(petId);
 		assertEquals(0, petMapService.findAll()
-				.size());
+			.size());
 	}
 
 	@Test
 	void findById() {
 		assertEquals(petId, petMapService.findById(petId)
-				.getId());
+			.getId());
 	}
 }

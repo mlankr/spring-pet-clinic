@@ -34,20 +34,20 @@ class VisitMapServiceTest {
 		when(pet.getPetType()).thenReturn(petType);
 
 		visitMapService.save(Visit.builder()
-				.pet(pet)
-				.build());
+			.pet(pet)
+			.build());
 	}
 
 	@Test
 	void findAll() {
 		assertEquals(1, visitMapService.findAll()
-				.size());
+			.size());
 	}
 
 	@Test
 	void findById() {
 		assertEquals(visitId, visitMapService.findById(visitId)
-				.getId());
+			.getId());
 	}
 
 	@Test
@@ -62,8 +62,8 @@ class VisitMapServiceTest {
 		when(pet2.getPetType()).thenReturn(petType2);
 
 		Visit savedVisit = visitMapService.save(Visit.builder()
-				.pet(pet2)
-				.build());
+			.pet(pet2)
+			.build());
 		assertEquals(secondId, savedVisit.getId());
 	}
 
@@ -71,13 +71,13 @@ class VisitMapServiceTest {
 	void delete() {
 		visitMapService.delete(visitMapService.findById(visitId));
 		assertEquals(0, visitMapService.findAll()
-				.size());
+			.size());
 	}
 
 	@Test
 	void deleteById() {
 		visitMapService.deleteById(visitId);
 		assertEquals(0, visitMapService.findAll()
-				.size());
+			.size());
 	}
 }

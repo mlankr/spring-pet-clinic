@@ -32,7 +32,7 @@ class VetJpaServiceTest {
 	@BeforeEach
 	void setUp() {
 		vet = Vet.builder()
-				.build();
+			.build();
 	}
 
 	@Test
@@ -40,7 +40,7 @@ class VetJpaServiceTest {
 		when(vetRepository.findAll()).thenReturn(Set.of(vet));
 
 		assertEquals(1, service.findAll()
-				.size());
+			.size());
 		verify(vetRepository, times(1)).findAll();
 	}
 
@@ -55,7 +55,7 @@ class VetJpaServiceTest {
 	@Test
 	void save() {
 		Vet vet2 = Vet.builder()
-				.build();
+			.build();
 
 		when(vetRepository.save(any())).thenReturn(vet2);
 
@@ -70,7 +70,7 @@ class VetJpaServiceTest {
 		service.delete(vet);
 
 		assertEquals(0, service.findAll()
-				.size());
+			.size());
 		verify(vetRepository, times(1)).delete(vet);
 	}
 
@@ -79,7 +79,7 @@ class VetJpaServiceTest {
 		service.deleteById(vetId);
 
 		assertEquals(0, service.findAll()
-				.size());
+			.size());
 		verify(vetRepository, times(1)).deleteById(vetId);
 	}
 }

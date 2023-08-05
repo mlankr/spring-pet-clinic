@@ -26,14 +26,14 @@ public class VetJpaService implements VetService {
 	public Set<Vet> findAll() {
 		Set<Vet> vets = new HashSet<>();
 		vetRepository.findAll()
-				.forEach(vets::add);
+			.forEach(vets::add);
 		return vets;
 	}
 
 	@Override
 	public Vet findById(Long id) {
 		return vetRepository.findById(id)
-				.orElse(null);
+			.orElse(null);
 	}
 
 	@Override

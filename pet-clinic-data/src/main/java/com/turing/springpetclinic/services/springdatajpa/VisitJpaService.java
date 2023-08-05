@@ -27,14 +27,14 @@ public class VisitJpaService implements VisitService {
 	public Set<Visit> findAll() {
 		Set<Visit> visits = new HashSet<>();
 		visitRepository.findAll()
-				.forEach(visits::add);
+			.forEach(visits::add);
 		return visits;
 	}
 
 	@Override
 	public Visit findById(Long id) {
 		return visitRepository.findById(id)
-				.orElse(null);
+			.orElse(null);
 	}
 
 	@Override
@@ -55,9 +55,9 @@ public class VisitJpaService implements VisitService {
 	@Override
 	public Set<Visit> findVisitsByPet(long petId) {
 		return findAll().stream()
-				.filter(v -> v.getPet()
-						.getId()
-						.equals(petId))
-				.collect(Collectors.toSet());
+			.filter(v -> v.getPet()
+				.getId()
+				.equals(petId))
+			.collect(Collectors.toSet());
 	}
 }

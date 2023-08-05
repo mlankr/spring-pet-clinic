@@ -26,14 +26,14 @@ public class SpecialityJpaService implements SpecialityService {
 	public Set<Speciality> findAll() {
 		Set<Speciality> specialities = new HashSet<>();
 		specialityRepository.findAll()
-				.forEach(specialities::add);
+			.forEach(specialities::add);
 		return specialities;
 	}
 
 	@Override
 	public Speciality findById(Long id) {
 		return specialityRepository.findById(id)
-				.orElse(null);
+			.orElse(null);
 	}
 
 	@Override

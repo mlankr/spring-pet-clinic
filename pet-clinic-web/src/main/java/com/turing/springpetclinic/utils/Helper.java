@@ -12,7 +12,7 @@ public class Helper {
 
 	public static Date localDateToDate(LocalDate localDate) {
 		return Date.from(localDate.atStartOfDay()
-				.atZone(ZoneId.systemDefault())
-				.toInstant());
+			.atZone(ZoneId.systemDefault())
+			.toInstant());
 	}
 }

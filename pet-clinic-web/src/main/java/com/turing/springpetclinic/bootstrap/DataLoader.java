@@ -34,7 +34,7 @@ public class DataLoader implements CommandLineRunner {
 	private final VisitService visitService;
 
 	public DataLoader(OwnerService ownerService, VetService vetService, PetService petService,
-			PetTypeService petTypeService, SpecialityService specialityService, VisitService visitService) {
+		PetTypeService petTypeService, SpecialityService specialityService, VisitService visitService) {
 		this.ownerService = ownerService;
 		this.vetService = vetService;
 		this.petService = petService;
@@ -46,7 +46,7 @@ public class DataLoader implements CommandLineRunner {
 	@Override
 	public void run(String... args) {
 		int count = petTypeService.findAll()
-				.size();
+			.size();
 
 		if (count == 0) {
 			loadData();
@@ -55,100 +55,100 @@ public class DataLoader implements CommandLineRunner {
 
 	private void loadData() {
 		PetType dog = PetType.builder()
-				.name("Dog")
-				.build();
+			.name("Dog")
+			.build();
 		PetType savedDogType = petTypeService.save(dog);
 
 		PetType cat = PetType.builder()
-				.name("Cat")
-				.build();
+			.name("Cat")
+			.build();
 		PetType savedCatType = petTypeService.save(cat);
 
 		Speciality radiology = Speciality.builder()
-				.description("radiology")
-				.build();
+			.description("radiology")
+			.build();
 		Speciality surgery = Speciality.builder()
-				.description("surgery")
-				.build();
+			.description("surgery")
+			.build();
 		Speciality dentistry = Speciality.builder()
-				.description("dentistry")
-				.build();
+			.description("dentistry")
+			.build();
 
 		Speciality savedRadiology = specialityService.save(radiology);
 		Speciality savedSurgery = specialityService.save(surgery);
 		Speciality savedDentistry = specialityService.save(dentistry);
 
 		Owner owner1 = Owner.builder()
-				.firstname("Michael")
-				.lastname("Weston")
-				.address("King street 123")
-				.city("London")
-				.telephone("0123456789")
-				.build();
+			.firstname("Michael")
+			.lastname("Weston")
+			.address("King street 123")
+			.city("London")
+			.telephone("0123456789")
+			.build();
 
 		ownerService.save(owner1);
 
 		Pet pet1 = Pet.builder()
-				.name("Shinobu")
-				.petType(savedDogType)
-				.owner(owner1)
-				.birthDate(Helper.localDateToDate(LocalDate.now()
-						.minusDays(330)))
-				.build();
+			.name("Shinobu")
+			.petType(savedDogType)
+			.owner(owner1)
+			.birthDate(Helper.localDateToDate(LocalDate.now()
+				.minusDays(330)))
+			.build();
 
 		petService.save(pet1);
 		owner1.toBuilder()
-				.pet(pet1)
-				.build();
+			.pet(pet1)
+			.build();
 		ownerService.save(owner1);
 
 		Owner owner2 = Owner.builder()
-				.firstname("Fiona")
-				.lastname("Glenna")
-				.address("Queen street 123")
-				.city("Manchester")
-				.telephone("0357903579")
-				.build();
+			.firstname("Fiona")
+			.lastname("Glenna")
+			.address("Queen street 123")
+			.city("Manchester")
+			.telephone("0357903579")
+			.build();
 
 		ownerService.save(owner2);
 
 		Pet pet2 = Pet.builder()
-				.name("Coco")
-				.petType(savedCatType)
-				.owner(owner2)
-				.birthDate(Helper.localDateToDate(LocalDate.now()
-						.minusDays(120)))
-				.build();
+			.name("Coco")
+			.petType(savedCatType)
+			.owner(owner2)
+			.birthDate(Helper.localDateToDate(LocalDate.now()
+				.minusDays(120)))
+			.build();
 
 		petService.save(pet2);
 		owner2.toBuilder()
-				.pet(pet2)
-				.build();
+			.pet(pet2)
+			.build();
 		ownerService.save(owner2);
 
 		Visit catVisit = Visit.builder()
-				.pet(pet2)
-				.date(Helper.localDateToDate(LocalDate.now()))
-				.description("Routine cat check-up")
-				.build();
+			.pet(pet2)
+			.date(Helper.localDateToDate(LocalDate.now()))
+			.description("Routine cat check-up")
+			.build();
 		visitService.save(catVisit);
 
 		Vet vet1 = Vet.builder()
-				.firstname("Sam")
-				.lastname("Axe")
-				.build();
+			.firstname("Sam")
+			.lastname("Axe")
+			.build();
 		vet1.toBuilder()
-				.specialties(Set.of(savedRadiology, savedDentistry))
-				.build();
+			.specialties(Set.of(savedRadiology, savedDentistry))
+			.build();
 		vetService.save(vet1);
 
 		Vet vet2 = Vet.builder()
-				.firstname("Jessie")
-				.lastname("Porter")
-				.build();
+			.firstname("Jessie")
+			.lastname("Porter")
+			.build();
 		vet2.toBuilder()
-				.specialty(savedSurgery)
-				.build();
+			.specialty(savedSurgery)
+			.build();
 		vetService.save(vet2);
 
 		log.info("Loaded PetTypes, Owners and Vets from DataLoader");

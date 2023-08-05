@@ -41,23 +41,23 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
 		if (owner != null) {
 			if (owner.getPets() != null) {
 				owner.getPets()
-						.forEach(pet -> {
-							if (pet.getPetType() != null) {
-								if (pet.getPetType()
-										.getId() == null) {
-									pet.toBuilder()
-											.petType(petTypeService.save(pet.getPetType()));
-								}
-							} else {
-								throw new RuntimeException("Pet Type is required!");
-							}
-
-							if (pet.getId() == null) {
-								Pet savedPet = petService.save(pet);
+					.forEach(pet -> {
+						if (pet.getPetType() != null) {
+							if (pet.getPetType()
+								.getId() == null) {
 								pet.toBuilder()
-										.id(savedPet.getId());
+									.petType(petTypeService.save(pet.getPetType()));
 							}
-						});
+						} else {
+							throw new RuntimeException("Pet Type is required!");
+						}
+
+						if (pet.getId() == null) {
+							Pet savedPet = petService.save(pet);
+							pet.toBuilder()
+								.id(savedPet.getId());
+						}
+					});
 
 			}
 			return super.save(owner);
@@ -88,19 +88,19 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
 	@Override
 	public Owner findByLastName(String lastName) {
 		return this.findAll()
-				.stream()
-				.filter(o -> o.getLastname()
-						.equalsIgnoreCase(lastName))
-				.findFirst()
-				.orElse(null);
+			.stream()
+			.filter(o -> o.getLastname()
+				.equalsIgnoreCase(lastName))
+			.findFirst()
+			.orElse(null);
 	}
 
 	@Override
 	public List<Owner> findAllByLastNameLike(String lastName) {
 		return this.findAll()
-				.stream()
-				.filter(o -> o.getLastname()
-						.contains(lastName))
-				.collect(Collectors.toList());
+			.stream()
+			.filter(o -> o.getLastname()
+				.contains(lastName))
+			.collect(Collectors.toList());
 	}
 }

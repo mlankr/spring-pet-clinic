@@ -23,27 +23,27 @@ class VetMapServiceTest {
 	@BeforeEach
 	void setUp() {
 		vetMapService.save(Vet.builder()
-				.build());
+			.build());
 	}
 
 	@Test
 	void findAll() {
 		assertEquals(1, vetMapService.findAll()
-				.size());
+			.size());
 	}
 
 	@Test
 	void delete() {
 		vetMapService.delete(vetMapService.findById(vetId));
 		assertEquals(0, vetMapService.findAll()
-				.size());
+			.size());
 	}
 
 	@Test
 	void save() {
 		Long secondId = 2L;
 		Vet savedVet = vetMapService.save(Vet.builder()
-				.build());
+			.build());
 		assertEquals(secondId, savedVet.getId());
 	}
 
@@ -51,12 +51,12 @@ class VetMapServiceTest {
 	void deleteById() {
 		vetMapService.deleteById(vetId);
 		assertEquals(0, vetMapService.findAll()
-				.size());
+			.size());
 	}
 
 	@Test
 	void findById() {
 		assertEquals(vetId, vetMapService.findById(vetId)
-				.getId());
+			.getId());
 	}
 }
