@@ -6,17 +6,21 @@ import com.turing.springpetclinic.model.PetType;
 import com.turing.springpetclinic.services.OwnerService;
 import com.turing.springpetclinic.services.PetService;
 import com.turing.springpetclinic.services.PetTypeService;
+import java.util.Collection;
+import java.util.Optional;
+import java.util.Set;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Collection;
-import java.util.Optional;
-import java.util.Set;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by Milan on 2023/07/09.
@@ -52,9 +56,12 @@ public class PetController {
 
 	@GetMapping("/new")
 	public String initCreationForm(Owner owner, Model model, @PathVariable Long ownerId) {
-		Pet pet = Pet.builder().build();
+		Pet pet = Pet.builder()
+				.build();
 		owner.setPets(Set.of(pet));
-		pet = pet.toBuilder().owner(owner).build();
+		pet = pet.toBuilder()
+				.owner(owner)
+				.build();
 		model.addAttribute("pet", pet);
 		return "pets/createOrUpdatePetForm";
 	}
@@ -62,14 +69,17 @@ public class PetController {
 	@PostMapping("/new")
 	public String processCreationForm(Owner owner, @Validated Pet pet, BindingResult result, Model model,
 			@PathVariable Long ownerId) {
-		if (StringUtils.hasLength(pet.getName()) && pet.isNew() && owner.getPets().contains(pet)) {
+		if (StringUtils.hasLength(pet.getName()) && pet.isNew() && owner.getPets()
+				.contains(pet)) {
 			result.rejectValue("name", "duplicate", "already exists");
 		}
 		if (result.hasErrors()) {
 			model.addAttribute("pet", pet);
 			return "pets/createOrUpdatePetForm";
 		} else {
-			pet = pet.toBuilder().owner(owner).build();
+			pet = pet.toBuilder()
+					.owner(owner)
+					.build();
 			Pet savedPet = petService.save(pet);
 			owner.setPets(Set.of(savedPet));
 			return "redirect:/owners/" + owner.getId();
@@ -86,11 +96,15 @@ public class PetController {
 	public String processUpdateForm(@Validated Pet pet, BindingResult result, Owner owner, Model model,
 			@PathVariable Long ownerId, @PathVariable Long petId) {
 		if (result.hasErrors()) {
-			pet = pet.toBuilder().owner(owner).build();
+			pet = pet.toBuilder()
+					.owner(owner)
+					.build();
 			model.addAttribute("pet", pet);
 			return "pets/createOrUpdatePetForm";
 		} else {
-			pet = pet.toBuilder().owner(owner).build();
+			pet = pet.toBuilder()
+					.owner(owner)
+					.build();
 			Pet updatedPet = petService.update(pet, petId);
 			owner.setPets(Set.of(updatedPet));
 			return "redirect:/owners/" + owner.getId();
@@ -105,7 +119,9 @@ public class PetController {
 		}
 
 		Optional.ofNullable(ownerService.findById(ownerId))
-				.ifPresent(o -> o.getPets().removeIf(p -> p != null && p.getId().equals(petId)));
+				.ifPresent(o -> o.getPets()
+						.removeIf(p -> p != null && p.getId()
+								.equals(petId)));
 
 		petService.deleteById(petId);
 		return "redirect:/owners/" + ownerId;

@@ -11,7 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by Milan on 2023/07/15.
@@ -41,8 +46,12 @@ public class VisitController {
 			Model model) {
 
 		Pet pet = petService.findById(petId);
-		Visit visit = Visit.builder().pet(pet).build();
-		pet = pet.toBuilder().visit(visit).build();
+		Visit visit = Visit.builder()
+				.pet(pet)
+				.build();
+		pet = pet.toBuilder()
+				.visit(visit)
+				.build();
 
 		Owner owner = ownerService.findById(ownerId);
 		model.addAttribute("owner", owner);
@@ -74,7 +83,10 @@ public class VisitController {
 		if (result.hasErrors() || visitService.findById(visitId) == null) {
 			return "pets/createOrUpdateVisitForm";
 		}
-		petService.findById(petId).getVisits().removeIf(v -> v.getId().equals(visitId));
+		petService.findById(petId)
+				.getVisits()
+				.removeIf(v -> v.getId()
+						.equals(visitId));
 		visitService.deleteById(visitId);
 		return "redirect:/owners/{ownerId}/pets/" + petId + "/visits/new";
 	}

@@ -1,7 +1,17 @@
 package com.turing.springpetclinic.services.springdatajpa;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.turing.springpetclinic.model.Vet;
 import com.turing.springpetclinic.repositories.VetRepository;
+import java.util.Optional;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,71 +19,67 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
-import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.*;
-
 @ExtendWith(MockitoExtension.class)
 class VetJpaServiceTest {
 
-    @Mock
-    private VetRepository vetRepository;
+	private final Long vetId = 1L;
+	@Mock
+	private VetRepository vetRepository;
+	@InjectMocks
+	private VetJpaService service;
+	private Vet vet;
 
-    @InjectMocks
-    private VetJpaService service;
+	@BeforeEach
+	void setUp() {
+		vet = Vet.builder()
+				.build();
+	}
 
-    private Vet vet;
-    private final Long vetId = 1L;
+	@Test
+	void findAll() {
+		when(vetRepository.findAll()).thenReturn(Set.of(vet));
 
-    @BeforeEach
-    void setUp() {
-        vet = Vet.builder().build();
-    }
+		assertEquals(1, service.findAll()
+				.size());
+		verify(vetRepository, times(1)).findAll();
+	}
 
-    @Test
-    void findAll() {
-        when(vetRepository.findAll()).thenReturn(Set.of(vet));
+	@Test
+	void findById() {
+		when(vetRepository.findById(anyLong())).thenReturn(Optional.of(vet));
 
-        assertEquals(1, service.findAll().size());
-        verify(vetRepository, times(1)).findAll();
-    }
+		assertNotNull(service.findById(vetId));
+		verify(vetRepository, times(1)).findById(vetId);
+	}
 
-    @Test
-    void findById() {
-        when(vetRepository.findById(anyLong())).thenReturn(Optional.of(vet));
+	@Test
+	void save() {
+		Vet vet2 = Vet.builder()
+				.build();
 
-        assertNotNull(service.findById(vetId));
-        verify(vetRepository, times(1)).findById(vetId);
-    }
+		when(vetRepository.save(any())).thenReturn(vet2);
 
-    @Test
-    void save() {
-        Vet vet2 = Vet.builder().build();
+		Vet savedVet = service.save(vet2);
 
-        when(vetRepository.save(any())).thenReturn(vet2);
+		assertNotNull(savedVet);
+		verify(vetRepository, times(1)).save(vet2);
+	}
 
-        Vet savedVet = service.save(vet2);
+	@Test
+	void delete() {
+		service.delete(vet);
 
-        assertNotNull(savedVet);
-        verify(vetRepository, times(1)).save(vet2);
-    }
+		assertEquals(0, service.findAll()
+				.size());
+		verify(vetRepository, times(1)).delete(vet);
+	}
 
-    @Test
-    void delete() {
-        service.delete(vet);
+	@Test
+	void deleteById() {
+		service.deleteById(vetId);
 
-        assertEquals(0, service.findAll().size());
-        verify(vetRepository, times(1)).delete(vet);
-    }
-
-    @Test
-    void deleteById() {
-        service.deleteById(vetId);
-
-        assertEquals(0, service.findAll().size());
-        verify(vetRepository, times(1)).deleteById(vetId);
-    }
+		assertEquals(0, service.findAll()
+				.size());
+		verify(vetRepository, times(1)).deleteById(vetId);
+	}
 }

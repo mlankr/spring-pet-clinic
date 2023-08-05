@@ -1,37 +1,37 @@
-<html xmlns:th="https://www.thymeleaf.org"
-      th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+<html th:replace="~{fragments/layout :: layout (~{::body},'owners')}"
+	  xmlns:th="https://www.thymeleaf.org">
 
 <body>
 <h2>
-    <th:block th:if="${pet['new']}">New</th:block>
-    Pet
+	<th:block th:if="${pet['new']}">New</th:block>
+	Pet
 </h2>
-<form th:object="${pet}" class="form-horizontal needs-validation" id="add-pet-form" method="post" novalidate>
-    <div class="form-group has-feedback">
-        <div class="col-sm-10 mt-3">
-            <p class="mb-0">Owner</p>
-            <p class="mb-0 border border-1 rounded p-2" th:text="${#strings.trim(owner?.firstname + ' ' + owner?.lastname)}"></p>
-        </div>
-        <div>
-            <input id="name" th:replace="~{fragments/inputField :: input ('Name', 'name', 'text', true)}" aria-label="name"/>
-        </div>
-        <div>
-            <input id="birthDate" th:replace="~{fragments/inputField :: input ('Birth Date', 'birthDate', 'date', true)}" aria-label="birthdate"/>
-        </div>
-        <div>
-            <input id="type" th:replace="~{fragments/selectField :: select ('Type', 'petType', ${types}, true, ${pet.getPetType()})}" aria-label="type"/>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10 mt-3 d-flex justify-content-center">
-            <button th:with="text=${pet['new']} ? 'Add Pet' : 'Update Pet'"
-                    class="btn btn-primary" type="submit" th:text="${text}">Add Pet
-            </button>
-        </div>
-    </div>
+<form class="form-horizontal needs-validation" id="add-pet-form" method="post" novalidate th:object="${pet}">
+	<div class="form-group has-feedback">
+		<div class="col-sm-10 mt-3">
+			<p class="mb-0">Owner</p>
+			<p class="mb-0 border border-1 rounded p-2" th:text="${#strings.trim(owner?.firstname + ' ' + owner?.lastname)}"></p>
+		</div>
+		<div>
+			<input aria-label="name" id="name" th:replace="~{fragments/inputField :: input ('Name', 'name', 'text', true)}"/>
+		</div>
+		<div>
+			<input aria-label="birthdate" id="birthDate" th:replace="~{fragments/inputField :: input ('Birth Date', 'birthDate', 'date', true)}"/>
+		</div>
+		<div>
+			<input aria-label="type" id="type" th:replace="~{fragments/selectField :: select ('Type', 'petType', ${types}, true, ${pet.getPetType()})}"/>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10 mt-3 d-flex justify-content-center">
+			<button class="btn btn-primary"
+					th:text="${text}" th:with="text=${pet['new']} ? 'Add Pet' : 'Update Pet'" type="submit">Add Pet
+			</button>
+		</div>
+	</div>
 </form>
-<div th:if="${petId != null}" class="col-sm-offset-2 col-sm-10 mt-4 d-flex justify-content-center">
-    <a th:href="'/owners/' + ${ownerId} + '/pets/' + ${petId} +'/delete'" th:text=" ${pet != null ? 'Delete Pet' : 'N/A'}" class="btn btn-danger" role="button">N/A</a>
+<div class="col-sm-offset-2 col-sm-10 mt-4 d-flex justify-content-center" th:if="${petId != null}">
+	<a class="btn btn-danger" role="button" th:href="'/owners/' + ${ownerId} + '/pets/' + ${petId} +'/delete'" th:text=" ${pet != null ? 'Delete Pet' : 'N/A'}">N/A</a>
 </div>
 </body>
 </html>

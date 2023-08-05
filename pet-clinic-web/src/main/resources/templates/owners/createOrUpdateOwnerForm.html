@@ -1,38 +1,38 @@
-<html xmlns:th="https://www.thymeleaf.org"
-      th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+<html th:replace="~{fragments/layout :: layout (~{::body},'owners')}"
+	  xmlns:th="https://www.thymeleaf.org">
 
 <body>
 <h2>Owner</h2>
-<form th:object="${owner}" class="form-horizontal needs-validation" id="add-owner-form" method="post" novalidate>
-    <div class="form-group has-feedback">
-        <div>
-            <input id="firstname" th:replace="~{fragments/inputField :: input ('First name', 'firstname', 'text', true)}" aria-label="firstname"/>
-        </div>
-        <div>
-            <input id="lastname" th:replace="~{fragments/inputField :: input ('Last name', 'lastname', 'text', true)}" aria-label="lastname"/>
-        </div>
-        <div>
-            <input id="address" th:replace="~{fragments/inputField :: input ('Address', 'address', 'text', true)}" aria-label="address"/>
-        </div>
-        <div>
-            <input id="city" th:replace="~{fragments/inputField :: input ('City', 'city', 'text', true)}" aria-label="city"/>
-        </div>
-        <div>
-            <input id="telephone" th:replace="~{fragments/inputField :: input ('Telephone', 'telephone', 'text', false)}" aria-label="telephone"/>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10 mt-2 d-flex justify-content-center">
-            <button
-                    th:with="text=${owner['new']} ? 'Add Owner' : 'Update Owner'"
-                    class="btn btn-primary" type="submit" th:text="${text}">Add
-                Owner
-            </button>
-        </div>
-    </div>
+<form class="form-horizontal needs-validation" id="add-owner-form" method="post" novalidate th:object="${owner}">
+	<div class="form-group has-feedback">
+		<div>
+			<input aria-label="firstname" id="firstname" th:replace="~{fragments/inputField :: input ('First name', 'firstname', 'text', true)}"/>
+		</div>
+		<div>
+			<input aria-label="lastname" id="lastname" th:replace="~{fragments/inputField :: input ('Last name', 'lastname', 'text', true)}"/>
+		</div>
+		<div>
+			<input aria-label="address" id="address" th:replace="~{fragments/inputField :: input ('Address', 'address', 'text', true)}"/>
+		</div>
+		<div>
+			<input aria-label="city" id="city" th:replace="~{fragments/inputField :: input ('City', 'city', 'text', true)}"/>
+		</div>
+		<div>
+			<input aria-label="telephone" id="telephone" th:replace="~{fragments/inputField :: input ('Telephone', 'telephone', 'text', false)}"/>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10 mt-2 d-flex justify-content-center">
+			<button
+					class="btn btn-primary"
+					th:text="${text}" th:with="text=${owner['new']} ? 'Add Owner' : 'Update Owner'" type="submit">Add
+				Owner
+			</button>
+		</div>
+	</div>
 </form>
-<div th:if="${ownerId != null}" class="col-sm-offset-2 col-sm-10 mt-4 d-flex justify-content-center">
-    <a th:href="'/owners/' + ${ownerId} + '/delete'" th:text=" ${owner != null ? 'Delete Owner' : 'N/A'}" class="btn btn-danger" role="button">N/A</a>
+<div class="col-sm-offset-2 col-sm-10 mt-4 d-flex justify-content-center" th:if="${ownerId != null}">
+	<a class="btn btn-danger" role="button" th:href="'/owners/' + ${ownerId} + '/delete'" th:text=" ${owner != null ? 'Delete Owner' : 'N/A'}">N/A</a>
 </div>
 </body>
 </html>

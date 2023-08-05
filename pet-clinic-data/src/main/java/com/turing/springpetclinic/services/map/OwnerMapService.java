@@ -5,12 +5,11 @@ import com.turing.springpetclinic.model.Pet;
 import com.turing.springpetclinic.services.OwnerService;
 import com.turing.springpetclinic.services.PetService;
 import com.turing.springpetclinic.services.PetTypeService;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Milan on 2023/02/18.
@@ -41,20 +40,24 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
 	public Owner save(Owner owner) {
 		if (owner != null) {
 			if (owner.getPets() != null) {
-				owner.getPets().forEach(pet -> {
-					if (pet.getPetType() != null) {
-						if (pet.getPetType().getId() == null) {
-							pet.toBuilder().petType(petTypeService.save(pet.getPetType()));
-						}
-					} else {
-						throw new RuntimeException("Pet Type is required!");
-					}
+				owner.getPets()
+						.forEach(pet -> {
+							if (pet.getPetType() != null) {
+								if (pet.getPetType()
+										.getId() == null) {
+									pet.toBuilder()
+											.petType(petTypeService.save(pet.getPetType()));
+								}
+							} else {
+								throw new RuntimeException("Pet Type is required!");
+							}
 
-					if (pet.getId() == null) {
-						Pet savedPet = petService.save(pet);
-						pet.toBuilder().id(savedPet.getId());
-					}
-				});
+							if (pet.getId() == null) {
+								Pet savedPet = petService.save(pet);
+								pet.toBuilder()
+										.id(savedPet.getId());
+							}
+						});
 
 			}
 			return super.save(owner);
@@ -84,11 +87,20 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
 
 	@Override
 	public Owner findByLastName(String lastName) {
-		return this.findAll().stream().filter(o -> o.getLastname().equalsIgnoreCase(lastName)).findFirst().orElse(null);
+		return this.findAll()
+				.stream()
+				.filter(o -> o.getLastname()
+						.equalsIgnoreCase(lastName))
+				.findFirst()
+				.orElse(null);
 	}
 
 	@Override
 	public List<Owner> findAllByLastNameLike(String lastName) {
-		return this.findAll().stream().filter(o -> o.getLastname().contains(lastName)).collect(Collectors.toList());
+		return this.findAll()
+				.stream()
+				.filter(o -> o.getLastname()
+						.contains(lastName))
+				.collect(Collectors.toList());
 	}
 }

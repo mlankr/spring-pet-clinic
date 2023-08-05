@@ -3,79 +3,79 @@
 
 <head>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+	<meta charset="utf-8">
+	<meta content="IE=edge" http-equiv="X-UA-Compatible">
+	<meta content="width=device-width, initial-scale=1" name="viewport">
 
-    <link rel="shortcut icon" type="image/x-icon" th:href="@{/resources/images/favicon.png}">
+	<link rel="shortcut icon" th:href="@{/resources/images/favicon.png}" type="image/x-icon">
 
-    <title>PetClinic</title>
+	<title>PetClinic</title>
 
-    <link rel="stylesheet" th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/dist/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/resources/css/petclinic.css}"/>
+	<link rel="stylesheet" th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}">
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/dist/css/bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/resources/css/petclinic.css}"/>
 </head>
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark" role="navigation">
-    <div class="container-fluid px-lg-5 mx-xxl-auto">
-        <a class="navbar-brand mx-auto" th:href="@{/}"><span></span></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-navbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="main-navbar" style>
+	<div class="container-fluid px-lg-5 mx-xxl-auto">
+		<a class="navbar-brand mx-auto" th:href="@{/}"><span></span></a>
+		<button class="navbar-toggler" data-bs-target="#main-navbar" data-bs-toggle="collapse" type="button">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-end" id="main-navbar" style>
 
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0" th:remove="all">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0" th:remove="all">
 
-                <li th:fragment="menuItem (link,active,title,glyph,text)" th:class="nav-item">
-                    <a th:class="${active==menu ? 'nav-link active' : 'nav-link'}" th:href="@{__${link}__}"
-                       th:title="${title}">
-                        <span th:class="'fa fa-'+${glyph}" class="fa fa-home"></span>
-                        <span th:text="${text}">Template</span>
-                    </a>
-                </li>
+				<li th:class="nav-item" th:fragment="menuItem (link,active,title,glyph,text)">
+					<a th:class="${active==menu ? 'nav-link active' : 'nav-link'}" th:href="@{__${link}__}"
+					   th:title="${title}">
+						<span class="fa fa-home" th:class="'fa fa-'+${glyph}"></span>
+						<span th:text="${text}">Template</span>
+					</a>
+				</li>
 
-            </ul>
+			</ul>
 
-            <ul class="nav navbar-nav w-75 justify-content-around">
+			<ul class="nav navbar-nav w-75 justify-content-around">
 
-                <li th:replace="~{::menuItem ('/','home','home page','home','Home')}">
-                    <span class="fa fa-home" aria-hidden="true"></span>
-                    <span>Home</span>
-                </li>
+				<li th:replace="~{::menuItem ('/','home','home page','home','Home')}">
+					<span aria-hidden="true" class="fa fa-home"></span>
+					<span>Home</span>
+				</li>
 
-                <li th:replace="~{::menuItem ('/owners/find','owners','find owners','search','Find owners')}">
-                    <span class="fa fa-search" aria-hidden="true"></span>
-                    <span>Find owners</span>
-                </li>
+				<li th:replace="~{::menuItem ('/owners/find','owners','find owners','search','Find owners')}">
+					<span aria-hidden="true" class="fa fa-search"></span>
+					<span>Find owners</span>
+				</li>
 
-                <li th:replace="~{::menuItem ('/vets','vets','veterinarians','th-list','Veterinarians')}">
-                    <span class="fa fa-th-list" aria-hidden="true"></span>
-                    <span>Veterinarians</span>
-                </li>
+				<li th:replace="~{::menuItem ('/vets','vets','veterinarians','th-list','Veterinarians')}">
+					<span aria-hidden="true" class="fa fa-th-list"></span>
+					<span>Veterinarians</span>
+				</li>
 
-                <li
-                        th:replace="~{::menuItem ('/oops','error','trigger a RuntimeException to see how it is handled','exclamation-triangle','Error')}">
-                    <span class="fa exclamation-triangle" aria-hidden="true"></span>
-                    <span>Error</span>
-                </li>
+				<li
+						th:replace="~{::menuItem ('/oops','error','trigger a RuntimeException to see how it is handled','exclamation-triangle','Error')}">
+					<span aria-hidden="true" class="fa exclamation-triangle"></span>
+					<span>Error</span>
+				</li>
 
-            </ul>
-        </div>
-    </div>
+			</ul>
+		</div>
+	</div>
 </nav>
 <div class="container-fluid page-container py-3">
-    <div class="content-wrap px-1 px-sm-2 pt-4">
-        <th:block th:insert="${template}"/>
-    </div>
-    <div class="row footer-container d-flex justify-content-center pt-3">
-        <div class="col-12 text-center">
-            <img src="../static/resources/images/spring-pivotal-logo.png"
-                 th:src="@{/resources/images/spring-pivotal-logo.png}" alt="Sponsored by Pivotal"/></div>
-        <p class="text-center mt-2">&copy;2023 Milan Koirala | Inspired By:
-            <a href="https://github.com/spring-projects/spring-petclinic">Spring-Petclinic-App</a></p>
-    </div>
+	<div class="content-wrap px-1 px-sm-2 pt-4">
+		<th:block th:insert="${template}"/>
+	</div>
+	<div class="row footer-container d-flex justify-content-center pt-3">
+		<div class="col-12 text-center">
+			<img alt="Sponsored by Pivotal"
+				 src="../static/resources/images/spring-pivotal-logo.png" th:src="@{/resources/images/spring-pivotal-logo.png}"/></div>
+		<p class="text-center mt-2">&copy;2023 Milan Koirala | Inspired By:
+			<a href="https://github.com/spring-projects/spring-petclinic">Spring-Petclinic-App</a></p>
+	</div>
 </div>
 <script th:src="@{/webjars/bootstrap/5.2.3/dist/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/resources/js/form.js}"></script>

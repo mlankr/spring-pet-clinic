@@ -1,7 +1,13 @@
 package com.turing.springpetclinic.controllers;
 
+import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.turing.springpetclinic.model.Vet;
 import com.turing.springpetclinic.services.VetService;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,11 +18,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import java.util.Set;
-
-import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class VetControllerTest {
@@ -33,9 +34,11 @@ class VetControllerTest {
 
 	@BeforeEach
 	void setUp() {
-		vets = Set.of(Vet.builder().build());
+		vets = Set.of(Vet.builder()
+				.build());
 
-		mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+		mockMvc = MockMvcBuilders.standaloneSetup(controller)
+				.build();
 	}
 
 	@Test
@@ -43,9 +46,12 @@ class VetControllerTest {
 		when(vetService.findAll()).thenReturn(vets);
 
 		mockMvc.perform(MockMvcRequestBuilders.get("/vets"))
-			   .andExpect(MockMvcResultMatchers.status().isOk())
-			   .andExpect(MockMvcResultMatchers.view().name("vets/index"))
-			   .andExpect(MockMvcResultMatchers.model().attribute("vets", hasSize(1)));
+				.andExpect(MockMvcResultMatchers.status()
+						.isOk())
+				.andExpect(MockMvcResultMatchers.view()
+						.name("vets/index"))
+				.andExpect(MockMvcResultMatchers.model()
+						.attribute("vets", hasSize(1)));
 
 		verify(vetService, times(1)).findAll();
 	}
@@ -55,9 +61,12 @@ class VetControllerTest {
 		when(vetService.findAll()).thenReturn(vets);
 
 		mockMvc.perform(MockMvcRequestBuilders.get("/vets/index"))
-			   .andExpect(MockMvcResultMatchers.status().isOk())
-			   .andExpect(MockMvcResultMatchers.view().name("vets/index"))
-			   .andExpect(MockMvcResultMatchers.model().attribute("vets", hasSize(1)));
+				.andExpect(MockMvcResultMatchers.status()
+						.isOk())
+				.andExpect(MockMvcResultMatchers.view()
+						.name("vets/index"))
+				.andExpect(MockMvcResultMatchers.model()
+						.attribute("vets", hasSize(1)));
 
 		verify(vetService, times(1)).findAll();
 	}

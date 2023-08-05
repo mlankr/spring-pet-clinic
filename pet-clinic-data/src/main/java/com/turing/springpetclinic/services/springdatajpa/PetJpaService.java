@@ -3,11 +3,10 @@ package com.turing.springpetclinic.services.springdatajpa;
 import com.turing.springpetclinic.model.Pet;
 import com.turing.springpetclinic.repositories.PetRepository;
 import com.turing.springpetclinic.services.PetService;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Service;
-
 import java.util.HashSet;
 import java.util.Set;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Milan on 2023/05/09.
@@ -26,13 +25,15 @@ public class PetJpaService implements PetService {
 	@Override
 	public Set<Pet> findAll() {
 		Set<Pet> pets = new HashSet<>();
-		petRepository.findAll().forEach(pets::add);
+		petRepository.findAll()
+				.forEach(pets::add);
 		return pets;
 	}
 
 	@Override
 	public Pet findById(Long id) {
-		return petRepository.findById(id).orElse(null);
+		return petRepository.findById(id)
+				.orElse(null);
 	}
 
 	@Override

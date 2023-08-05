@@ -1,5 +1,9 @@
 package com.turing.springpetclinic.services.map;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import com.turing.springpetclinic.model.Owner;
 import com.turing.springpetclinic.model.Pet;
 import com.turing.springpetclinic.model.PetType;
@@ -11,69 +15,69 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 @ExtendWith(MockitoExtension.class)
 class VisitMapServiceTest {
 
-    @Mock
-    private Owner owner;
+	private final Long visitId = 1L;
+	@Mock
+	private Owner owner;
+	@Mock
+	private Pet pet;
+	@Mock
+	private PetType petType;
+	@InjectMocks
+	private VisitMapService visitMapService;
 
-    @Mock
-    private Pet pet;
+	@BeforeEach
+	void setUp() {
+		when(pet.getOwner()).thenReturn(owner);
+		when(pet.getPetType()).thenReturn(petType);
 
-    @Mock
-    private PetType petType;
+		visitMapService.save(Visit.builder()
+				.pet(pet)
+				.build());
+	}
 
-    @InjectMocks
-    private VisitMapService visitMapService;
+	@Test
+	void findAll() {
+		assertEquals(1, visitMapService.findAll()
+				.size());
+	}
 
-    private final Long visitId = 1L;
+	@Test
+	void findById() {
+		assertEquals(visitId, visitMapService.findById(visitId)
+				.getId());
+	}
 
-    @BeforeEach
-    void setUp() {
-        when(pet.getOwner()).thenReturn(owner);
-        when(pet.getPetType()).thenReturn(petType);
+	@Test
+	void save() {
+		Long secondId = 2L;
 
-        visitMapService.save(Visit.builder().pet(pet).build());
-    }
+		Owner owner2 = mock(Owner.class);
+		PetType petType2 = mock(PetType.class);
+		Pet pet2 = mock(Pet.class);
 
-    @Test
-    void findAll() {
-        assertEquals(1, visitMapService.findAll().size());
-    }
+		when(pet2.getOwner()).thenReturn(owner2);
+		when(pet2.getPetType()).thenReturn(petType2);
 
-    @Test
-    void findById() {
-        assertEquals(visitId, visitMapService.findById(visitId).getId());
-    }
+		Visit savedVisit = visitMapService.save(Visit.builder()
+				.pet(pet2)
+				.build());
+		assertEquals(secondId, savedVisit.getId());
+	}
 
-    @Test
-    void save() {
-        Long secondId = 2L;
+	@Test
+	void delete() {
+		visitMapService.delete(visitMapService.findById(visitId));
+		assertEquals(0, visitMapService.findAll()
+				.size());
+	}
 
-        Owner owner2 = mock(Owner.class);
-        PetType petType2 = mock(PetType.class);
-        Pet pet2 = mock(Pet.class);
-
-        when(pet2.getOwner()).thenReturn(owner2);
-        when(pet2.getPetType()).thenReturn(petType2);
-
-        Visit savedVisit = visitMapService.save(Visit.builder().pet(pet2).build());
-        assertEquals(secondId, savedVisit.getId());
-    }
-
-    @Test
-    void delete() {
-        visitMapService.delete(visitMapService.findById(visitId));
-        assertEquals(0, visitMapService.findAll().size());
-    }
-
-    @Test
-    void deleteById() {
-        visitMapService.deleteById(visitId);
-        assertEquals(0, visitMapService.findAll().size());
-    }
+	@Test
+	void deleteById() {
+		visitMapService.deleteById(visitId);
+		assertEquals(0, visitMapService.findAll()
+				.size());
+	}
 }

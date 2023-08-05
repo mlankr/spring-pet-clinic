@@ -1,7 +1,17 @@
 package com.turing.springpetclinic.services.springdatajpa;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.turing.springpetclinic.model.Visit;
 import com.turing.springpetclinic.repositories.VisitRepository;
+import java.util.Optional;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,71 +19,67 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
-import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.*;
-
 @ExtendWith(MockitoExtension.class)
 class VisitJpaServiceTest {
 
-    @Mock
-    private VisitRepository visitRepository;
+	private final Long visitId = 1L;
+	@Mock
+	private VisitRepository visitRepository;
+	@InjectMocks
+	private VisitJpaService service;
+	private Visit visit;
 
-    @InjectMocks
-    private VisitJpaService service;
+	@BeforeEach
+	void setUp() {
+		visit = Visit.builder()
+				.build();
+	}
 
-    private Visit visit;
-    private final Long visitId = 1L;
+	@Test
+	void findAll() {
+		when(visitRepository.findAll()).thenReturn(Set.of(visit));
 
-    @BeforeEach
-    void setUp() {
-        visit = Visit.builder().build();
-    }
+		assertEquals(1, service.findAll()
+				.size());
+		verify(visitRepository, times(1)).findAll();
+	}
 
-    @Test
-    void findAll() {
-        when(visitRepository.findAll()).thenReturn(Set.of(visit));
+	@Test
+	void findById() {
+		when(visitRepository.findById(anyLong())).thenReturn(Optional.of(visit));
 
-        assertEquals(1, service.findAll().size());
-        verify(visitRepository, times(1)).findAll();
-    }
+		assertNotNull(service.findById(visitId));
+		verify(visitRepository, times(1)).findById(visitId);
+	}
 
-    @Test
-    void findById() {
-        when(visitRepository.findById(anyLong())).thenReturn(Optional.of(visit));
+	@Test
+	void save() {
+		Visit petType2 = Visit.builder()
+				.build();
 
-        assertNotNull(service.findById(visitId));
-        verify(visitRepository, times(1)).findById(visitId);
-    }
+		when(visitRepository.save(any())).thenReturn(petType2);
 
-    @Test
-    void save() {
-        Visit petType2 = Visit.builder().build();
+		Visit savedVisit = service.save(petType2);
 
-        when(visitRepository.save(any())).thenReturn(petType2);
+		assertNotNull(savedVisit);
+		verify(visitRepository, times(1)).save(petType2);
+	}
 
-        Visit savedVisit = service.save(petType2);
+	@Test
+	void delete() {
+		service.delete(visit);
 
-        assertNotNull(savedVisit);
-        verify(visitRepository, times(1)).save(petType2);
-    }
+		assertEquals(0, service.findAll()
+				.size());
+		verify(visitRepository, times(1)).delete(visit);
+	}
 
-    @Test
-    void delete() {
-        service.delete(visit);
+	@Test
+	void deleteById() {
+		service.deleteById(visitId);
 
-        assertEquals(0, service.findAll().size());
-        verify(visitRepository, times(1)).delete(visit);
-    }
-
-    @Test
-    void deleteById() {
-        service.deleteById(visitId);
-
-        assertEquals(0, service.findAll().size());
-        verify(visitRepository, times(1)).deleteById(visitId);
-    }
+		assertEquals(0, service.findAll()
+				.size());
+		verify(visitRepository, times(1)).deleteById(visitId);
+	}
 }

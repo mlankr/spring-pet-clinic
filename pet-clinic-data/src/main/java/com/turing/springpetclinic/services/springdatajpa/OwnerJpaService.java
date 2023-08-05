@@ -3,12 +3,11 @@ package com.turing.springpetclinic.services.springdatajpa;
 import com.turing.springpetclinic.model.Owner;
 import com.turing.springpetclinic.repositories.OwnerRepository;
 import com.turing.springpetclinic.services.OwnerService;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Service;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Milan on 2023/05/08.
@@ -27,13 +26,15 @@ public class OwnerJpaService implements OwnerService {
 	@Override
 	public Set<Owner> findAll() {
 		Set<Owner> owners = new HashSet<>();
-		ownerRepository.findAll().forEach(owners::add);
+		ownerRepository.findAll()
+				.forEach(owners::add);
 		return owners;
 	}
 
 	@Override
 	public Owner findById(Long id) {
-		return ownerRepository.findById(id).orElse(null);
+		return ownerRepository.findById(id)
+				.orElse(null);
 	}
 
 	@Override

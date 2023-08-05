@@ -2,11 +2,10 @@ package com.turing.springpetclinic.services.map;
 
 import com.turing.springpetclinic.model.Visit;
 import com.turing.springpetclinic.services.VisitService;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Service;
-
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Milan on 2023/05/09.
@@ -27,7 +26,9 @@ public class VisitMapService extends AbstractMapService<Visit, Long> implements 
 
 	@Override
 	public Visit save(Visit visit) {
-		if (visit.getPet() == null || visit.getPet().getOwner() == null || visit.getPet().getPetType() == null) {
+		if (visit.getPet() == null || visit.getPet()
+				.getOwner() == null || visit.getPet()
+				.getPetType() == null) {
 			throw new RuntimeException("Invalid Visit");
 		}
 		return super.save(visit);
@@ -45,6 +46,10 @@ public class VisitMapService extends AbstractMapService<Visit, Long> implements 
 
 	@Override
 	public Set<Visit> findVisitsByPet(long petId) {
-		return findAll().stream().filter(v -> v.getPet().getId().equals(petId)).collect(Collectors.toSet());
+		return findAll().stream()
+				.filter(v -> v.getPet()
+						.getId()
+						.equals(petId))
+				.collect(Collectors.toSet());
 	}
 }

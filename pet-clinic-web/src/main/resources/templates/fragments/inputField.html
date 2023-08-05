@@ -1,33 +1,36 @@
 <html>
 <body>
 <form>
-    <th:block th:fragment="input (label, name, type, isRequired)">
-        <div th:with="valid=${!#fields.hasErrors(name)}"
-             th:class="${'form-group' + (valid ? '' : ' has-error')}"
-             class="form-group row">
-            <div class="col-sm-10">
-                <div th:switch="${type}">
-                    <label th:for="${name + '' + type}" class="col-sm-4 control-label mt-3">
+	<th:block th:fragment="input (label, name, type, isRequired)">
+		<div class="form-group row"
+			 th:class="${'form-group' + (valid ? '' : ' has-error')}"
+			 th:with="valid=${!#fields.hasErrors(name)}">
+			<div class="col-sm-10">
+				<div th:switch="${type}">
+					<label class="col-sm-4 control-label mt-3" th:for="${name + '' + type}">
                         <span>
                             <span th:text="${label}">Label</span>
-                            <span th:text="${isRequired} ? '*' : ''" class="text-danger"></span>
+                            <span class="text-danger" th:text="${isRequired} ? '*' : ''"></span>
                         </span>
-                    </label>
-                    <input th:id="${name + '' + type}" th:case="'text'" class="form-control mt-2" type="text" th:field="*{__${name}__}" th:required="${isRequired}" aria-label=""/>
-                    <input id="date-input" th:case="'date'" class="form-control mt-2" type="date" th:field="*{__${name}__}" th:required="${isRequired}" aria-label=""/>
-                    <textarea th:id="${name + '' + type}" th:case="'textarea'" class="form-control mt-2" rows="3" th:field="*{__${name}__}" th:required="${isRequired}" aria-label=""></textarea>
-                </div>
-                <span th:if="${valid}"
-                      class="fa fa-ok form-control-feedback"
-                      aria-hidden="true"></span>
-                <th:block th:if="${!valid}">
-            <span class="fa fa-remove form-control-feedback"
-                  aria-hidden="true"></span>
-                    <span class="help-inline" th:errors="*{__${name}__}">Error</span>
-                </th:block>
-            </div>
-        </div>
-    </th:block>
+					</label>
+					<input aria-label="" class="form-control mt-2" th:case="'text'" th:field="*{__${name}__}" th:id="${name + '' + type}"
+						   th:required="${isRequired}" type="text"/>
+					<input aria-label="" class="form-control mt-2" id="date-input" th:case="'date'" th:field="*{__${name}__}" th:required="${isRequired}"
+						   type="date"/>
+					<textarea aria-label="" class="form-control mt-2" rows="3" th:case="'textarea'" th:field="*{__${name}__}"
+							  th:id="${name + '' + type}" th:required="${isRequired}"></textarea>
+				</div>
+				<span aria-hidden="true"
+					  class="fa fa-ok form-control-feedback"
+					  th:if="${valid}"></span>
+				<th:block th:if="${!valid}">
+            <span aria-hidden="true"
+				  class="fa fa-remove form-control-feedback"></span>
+					<span class="help-inline" th:errors="*{__${name}__}">Error</span>
+				</th:block>
+			</div>
+		</div>
+	</th:block>
 </form>
 </body>
 </html>

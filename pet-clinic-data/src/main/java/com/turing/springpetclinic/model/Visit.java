@@ -1,10 +1,17 @@
 package com.turing.springpetclinic.model;
 
-import jakarta.persistence.*;
-import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
-
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * Created by Milan on 2023/04/18.
@@ -17,6 +24,7 @@ import java.util.Date;
 @Entity
 @Table
 public class Visit extends BaseEntity {
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date date;
 

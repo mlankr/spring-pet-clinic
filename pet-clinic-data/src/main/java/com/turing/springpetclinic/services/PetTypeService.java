@@ -7,4 +7,5 @@ import com.turing.springpetclinic.model.PetType;
  */
 
 public interface PetTypeService extends CrudService<PetType, Long> {
+
 }

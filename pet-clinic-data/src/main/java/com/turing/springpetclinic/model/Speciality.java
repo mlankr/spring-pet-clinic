@@ -16,11 +16,11 @@ import lombok.NoArgsConstructor;
 @Table
 public class Speciality extends BaseEntity {
 
-    private String description;
+	private String description;
 
-    @Builder(toBuilder = true)
-    public Speciality(@Builder.ObtainVia(method = "getId") Long id, String description) {
-        super(id);
-        this.description = description;
-    }
+	@Builder(toBuilder = true)
+	public Speciality(@Builder.ObtainVia(method = "getId") Long id, String description) {
+		super(id);
+		this.description = description;
+	}
 }

@@ -1,7 +1,17 @@
 package com.turing.springpetclinic.services.springdatajpa;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.turing.springpetclinic.model.PetType;
 import com.turing.springpetclinic.repositories.PetTypeRepository;
+import java.util.Optional;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,71 +19,67 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
-import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.*;
-
 @ExtendWith(MockitoExtension.class)
 class PetTypeJpaServiceTest {
 
-    @Mock
-    private PetTypeRepository petTypeRepository;
+	private final Long petTypeId = 1L;
+	@Mock
+	private PetTypeRepository petTypeRepository;
+	@InjectMocks
+	private PetTypeJpaService service;
+	private PetType petType;
 
-    @InjectMocks
-    private PetTypeJpaService service;
+	@BeforeEach
+	void setUp() {
+		petType = PetType.builder()
+				.build();
+	}
 
-    private PetType petType;
-    private final Long petTypeId = 1L;
+	@Test
+	void findAll() {
+		when(petTypeRepository.findAll()).thenReturn(Set.of(petType));
 
-    @BeforeEach
-    void setUp() {
-        petType = PetType.builder().build();
-    }
+		assertEquals(1, service.findAll()
+				.size());
+		verify(petTypeRepository, times(1)).findAll();
+	}
 
-    @Test
-    void findAll() {
-        when(petTypeRepository.findAll()).thenReturn(Set.of(petType));
+	@Test
+	void findById() {
+		when(petTypeRepository.findById(anyLong())).thenReturn(Optional.of(petType));
 
-        assertEquals(1, service.findAll().size());
-        verify(petTypeRepository, times(1)).findAll();
-    }
+		assertNotNull(service.findById(petTypeId));
+		verify(petTypeRepository, times(1)).findById(petTypeId);
+	}
 
-    @Test
-    void findById() {
-        when(petTypeRepository.findById(anyLong())).thenReturn(Optional.of(petType));
+	@Test
+	void save() {
+		PetType petType2 = PetType.builder()
+				.build();
 
-        assertNotNull(service.findById(petTypeId));
-        verify(petTypeRepository, times(1)).findById(petTypeId);
-    }
+		when(petTypeRepository.save(any())).thenReturn(petType2);
 
-    @Test
-    void save() {
-        PetType petType2 = PetType.builder().build();
+		PetType savedPetType = service.save(petType2);
 
-        when(petTypeRepository.save(any())).thenReturn(petType2);
+		assertNotNull(savedPetType);
+		verify(petTypeRepository, times(1)).save(petType2);
+	}
 
-        PetType savedPetType = service.save(petType2);
+	@Test
+	void delete() {
+		service.delete(petType);
 
-        assertNotNull(savedPetType);
-        verify(petTypeRepository, times(1)).save(petType2);
-    }
+		assertEquals(0, service.findAll()
+				.size());
+		verify(petTypeRepository, times(1)).delete(petType);
+	}
 
-    @Test
-    void delete() {
-        service.delete(petType);
+	@Test
+	void deleteById() {
+		service.deleteById(petTypeId);
 
-        assertEquals(0, service.findAll().size());
-        verify(petTypeRepository, times(1)).delete(petType);
-    }
-
-    @Test
-    void deleteById() {
-        service.deleteById(petTypeId);
-
-        assertEquals(0, service.findAll().size());
-        verify(petTypeRepository, times(1)).deleteById(petTypeId);
-    }
+		assertEquals(0, service.findAll()
+				.size());
+		verify(petTypeRepository, times(1)).deleteById(petTypeId);
+	}
 }

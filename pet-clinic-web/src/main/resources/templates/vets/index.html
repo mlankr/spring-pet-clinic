@@ -1,29 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'vets')}">
+<html lang="en" th:replace="~{fragments/layout :: layout (~{::body},'vets')}" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>List of Vets</title>
+	<meta charset="UTF-8">
+	<title>List of Vets</title>
 </head>
 <body>
 <!--/* @thymesVar id="vet" type="com.turing.springpetclinic.model.Vet" */-->
 <h1 th:text="'List of Vets'">List of Vets</h1>
 <div class="container gx-0">
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th style="width: 150px">Id</th>
-            <th style="width: 150px">First Name</th>
-            <th style="width: 150px">Last Name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="vet: ${vets}">
-            <td th:text="${vet.id}">0</td>
-            <td th:text="${vet.firstname}">Dummy</td>
-            <td th:text="${vet.lastname}">Vet</td>
-        </tr>
-        </tbody>
-    </table>
+	<table class="table table-striped">
+		<thead>
+		<tr>
+			<th style="width: 150px">Id</th>
+			<th style="width: 150px">First Name</th>
+			<th style="width: 150px">Last Name</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:each="vet: ${vets}">
+			<td th:text="${vet.id}">0</td>
+			<td th:text="${vet.firstname}">Dummy</td>
+			<td th:text="${vet.lastname}">Vet</td>
+		</tr>
+		</tbody>
+	</table>
 </div>
 </body>
 </html>

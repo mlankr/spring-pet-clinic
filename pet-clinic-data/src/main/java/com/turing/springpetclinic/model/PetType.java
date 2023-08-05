@@ -16,11 +16,11 @@ import lombok.NoArgsConstructor;
 @Table(name = "types")
 public class PetType extends BaseEntity {
 
-    private String name;
+	private String name;
 
-    @Builder
-    public PetType(@Builder.ObtainVia(method = "getId") Long id, String name) {
-        super(id);
-        this.name = name;
-    }
+	@Builder
+	public PetType(@Builder.ObtainVia(method = "getId") Long id, String name) {
+		super(id);
+		this.name = name;
+	}
 }
