@@ -33,6 +33,6 @@ class IndexControllerTest {
 			.andExpect(MockMvcResultMatchers.status()
 				.isOk())
 			.andExpect(MockMvcResultMatchers.view()
-				.name("notImplemented"));
+				.name("oops/index"));
 	}
 }
