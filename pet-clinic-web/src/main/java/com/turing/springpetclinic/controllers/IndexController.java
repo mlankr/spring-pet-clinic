@@ -1,6 +1,7 @@
 package com.turing.springpetclinic.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -16,6 +17,11 @@ public class IndexController {
 
 	@RequestMapping("/oops")
 	public String error() {
-		return "notImplemented";
+		return "oops/index";
+	}
+
+	@GetMapping("/*")
+	public String notImplemented() {
+		return "oops/notFound";
 	}
 }

@@ -126,4 +126,9 @@ public class PetController {
 		petService.deleteById(petId);
 		return "redirect:/owners/" + ownerId;
 	}
+
+	@GetMapping("/*")
+	public String notImplemented() {
+		return "oops/notFound";
+	}
 }

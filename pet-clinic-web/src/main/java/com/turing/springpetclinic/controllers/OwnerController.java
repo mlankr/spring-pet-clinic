@@ -111,4 +111,9 @@ public class OwnerController {
 		ownerService.deleteById(ownerId);
 		return "redirect:/owners";
 	}
+
+	@GetMapping("/*")
+	public String notImplemented() {
+		return "oops/notFound";
+	}
 }

@@ -42,8 +42,7 @@ public class VisitController {
 
 
 	@ModelAttribute("visit")
-	public Visit loadPetWithVisit(@PathVariable("ownerId") Long ownerId, @PathVariable("petId") Long petId,
-		Model model) {
+	public Visit loadPetWithVisit(@PathVariable("ownerId") Long ownerId, @PathVariable("petId") Long petId, Model model) {
 
 		Pet pet = petService.findById(petId);
 		Visit visit = Visit.builder()
@@ -68,8 +67,7 @@ public class VisitController {
 	}
 
 	@PostMapping("/new")
-	public String processNewVisitForm(@PathVariable Long petId, @Validated Visit visit, BindingResult result,
-		@PathVariable Long ownerId) {
+	public String processNewVisitForm(@PathVariable Long petId, @Validated Visit visit, BindingResult result, @PathVariable Long ownerId) {
 		if (result.hasErrors()) {
 			return "pets/createOrUpdateVisitForm";
 		}
@@ -78,8 +76,7 @@ public class VisitController {
 	}
 
 	@RequestMapping("/{visitId}/delete")
-	public String deleteVisit(@PathVariable Long visitId, @PathVariable Long petId, @Validated Visit visit,
-		BindingResult result, @PathVariable Long ownerId) {
+	public String deleteVisit(@PathVariable Long visitId, @PathVariable Long petId, @Validated Visit visit, BindingResult result, @PathVariable Long ownerId) {
 		if (result.hasErrors() || visitService.findById(visitId) == null) {
 			return "pets/createOrUpdateVisitForm";
 		}
@@ -89,5 +86,10 @@ public class VisitController {
 				.equals(visitId));
 		visitService.deleteById(visitId);
 		return "redirect:/owners/{ownerId}/pets/" + petId + "/visits/new";
+	}
+
+	@GetMapping("/*")
+	public String notImplemented() {
+		return "oops/notFound";
 	}
 }

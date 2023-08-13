@@ -18,8 +18,8 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark" role="navigation">
-	<div class="container-fluid px-lg-5 mx-xxl-auto">
+<nav class="navbar navbar-expand-lg navbar-dark p-0" role="navigation">
+	<div class="container-fluid">
 		<a class="navbar-brand mx-auto" th:href="@{/}"><span></span></a>
 		<button class="navbar-toggler" data-bs-target="#main-navbar" data-bs-toggle="collapse" type="button">
 			<span class="navbar-toggler-icon"></span>
@@ -65,16 +65,15 @@
 		</div>
 	</div>
 </nav>
-<div class="container-fluid page-container py-3">
-	<div class="content-wrap px-1 px-sm-2 pt-4">
+<div class="container-fluid p-0 main_container">
+	<div class="content-wrap page-container px-1 px-sm-2 py-3">
 		<th:block th:insert="${template}"/>
 	</div>
-	<div class="row footer-container d-flex justify-content-center pt-3">
-		<div class="col-12 text-center">
-			<img alt="Sponsored by Pivotal"
-				 src="../static/resources/images/spring-pivotal-logo.png" th:src="@{/resources/images/spring-pivotal-logo.png}"/></div>
-		<p class="text-center mt-2">&copy;2023 Milan Koirala | Inspired By:
-			<a href="https://github.com/spring-projects/spring-petclinic">Spring-Petclinic-App</a></p>
+	<div class="w-100 text-center footer-container">
+		<img alt="Sponsored by Pivotal"
+			 src="../static/resources/images/spring-pivotal-logo.png" th:src="@{/resources/images/spring-pivotal-logo.png}"/>
+		<p class="m-0">&copy;2023 Milan Koirala | Inspired By:
+			<a href="https://github.com/spring-projects/spring-petclinic" target="_blank">Spring-Petclinic-App</a></p>
 	</div>
 </div>
 <script th:src="@{/webjars/bootstrap/5.2.3/dist/js/bootstrap.bundle.min.js}"></script>
