@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: petclinic-app
-          path: '${{ env.ASC_PACKAGE_PATH }}/target/*.jar'
+          path: '${{ env.ASC_PACKAGE_PATH }}/pet-clinic-web/target/*.jar'
 
   deploy:
     name: Deploy to Azure Cloud
