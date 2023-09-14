@@ -12,15 +12,17 @@
 		<thead>
 		<tr>
 			<th style="width: 150px">Id</th>
-			<th style="width: 150px">First Name</th>
-			<th style="width: 150px">Last Name</th>
+			<th style="width: 150px">Name</th>
+			<th style="width: 150px">Specialties</th>
 		</tr>
 		</thead>
 		<tbody>
 		<tr th:each="vet: ${vets}">
 			<td th:text="${vet.id}">0</td>
-			<td th:text="${vet.firstname}">Dummy</td>
-			<td th:text="${vet.lastname}">Vet</td>
+			<td th:text="${vet.firstname + ' ' + vet.lastname}">Dummy Vet</td>
+			<td><span th:each="specialty, index : ${vet.getSpecialties()}"
+					  th:text="${#strings.capitalize(specialty.description)} + ${!index.last ? ', ' : ''}"/><span
+				th:if="${vet?.getSpecialties()?.size() == 0}">N/A</span></td>
 		</tr>
 		</tbody>
 	</table>
