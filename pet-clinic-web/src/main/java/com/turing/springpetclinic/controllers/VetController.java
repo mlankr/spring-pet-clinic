@@ -1,13 +1,10 @@
 package com.turing.springpetclinic.controllers;
 
-import com.turing.springpetclinic.model.Vet;
 import com.turing.springpetclinic.services.VetService;
-import java.util.Set;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by Milan on 2023/02/19.
@@ -25,11 +22,6 @@ public class VetController {
 	public String listVets(Model model) {
 		model.addAttribute("vets", vetService.findAll());
 		return "vets/index";
-	}
-
-	@GetMapping({"/api/vets"})
-	public @ResponseBody Set<Vet> vetsJson() {
-		return vetService.findAll();
 	}
 
 	@GetMapping("/vets/*")

@@ -1,5 +1,6 @@
 package com.turing.springpetclinic.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -9,6 +10,7 @@ import jakarta.persistence.Table;
 import java.util.Date;
 import java.util.Set;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,8 +24,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table
+@JsonIgnoreProperties({"owner", "visits"})
 public class Pet extends BaseEntity {
 
 	private String name;

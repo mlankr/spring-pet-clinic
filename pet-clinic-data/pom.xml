@@ -12,6 +12,8 @@
 
 	<properties>
 		<spring-boot.repackage.skip>true</spring-boot.repackage.skip>
+
+		<jackson-annotation.version>2.15.2</jackson-annotation.version>
 	</properties>
 
 	<dependencies>
@@ -43,6 +45,12 @@
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson-annotation.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
