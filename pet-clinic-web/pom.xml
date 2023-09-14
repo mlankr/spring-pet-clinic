@@ -24,7 +24,7 @@
 		<dependency>
 			<artifactId>pet-clinic-data</artifactId>
 			<groupId>com.turing</groupId>
-			<version>0.0.3-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -63,6 +63,7 @@
 		<profile>
 			<id>css</id>
 			<build>
+				<finalName>${project.artifactId}</finalName>
 				<plugins>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
