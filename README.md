@@ -1,8 +1,9 @@
-# Spring Boot Pet Clinic Project
+# `Spring Boot Pet Clinic Project`
 
-[![Maven CI/CD](https://github.com/mlankr/spring-pet-clinic/actions/workflows/maven.yml/badge.svg)](https://github.com/mlankr/spring-pet-clinic/actions/workflows/maven.yml)
-
-[![Deploy JAR to Azure Web App](https://github.com/mlankr/spring-pet-clinic/actions/workflows/azure.yml/badge.svg)](https://github.com/mlankr/spring-pet-clinic/actions/workflows/azure.yml)
+|                             | Production                                                                                                                                                                                                   | Development                                                                                                                                                                                                         |
+|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Maven CI/CD                 | <center>[![Build and Tests](https://github.com/mlankr/spring-pet-clinic/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/mlankr/spring-pet-clinic/actions/workflows/maven.yml)<center> | <center>[![Build and Tests](https://github.com/mlankr/spring-pet-clinic/actions/workflows/maven.yml/badge.svg?branch=development)](https://github.com/mlankr/spring-pet-clinic/actions/workflows/maven.yml)<center> |
+| Deploy JAR to Azure Web App | <center>[![Deployment](https://github.com/mlankr/spring-pet-clinic/actions/workflows/azure.yml/badge.svg?branch=main)](https://github.com/mlankr/spring-pet-clinic/actions/workflows/azure.yml)<center>      | <center>No Deployment<center>                                                                                                                                                                                       |
 
 ---
 
