@@ -35,7 +35,7 @@ import org.springframework.web.util.UriTemplate;
  * Created by Milan on 2023/07/15.
  */
 @ExtendWith(MockitoExtension.class)
-public class VisitControllerTest {
+class VisitControllerTest {
 
 	private final UriTemplate visitsUriTemplate = new UriTemplate("/owners/{ownerId}/pets/{petId}/visits/new");
 	private final Map<String, String> uriVariables = new HashMap<>();
